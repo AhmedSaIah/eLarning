@@ -1,12 +1,8 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Logo from "./assets/Talabat-logo.png";
-import LoginScreen from "./Screens/LoginScreen";
-import RegisterScreen from "./Screens/RegisterScreen";
-import HomeScreen from "./Screens/HomeScreen";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -15,12 +11,6 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-      </Stack.Navigator>
       <View style={styles.container}>
         <View style={styles.logo}>
           <Image source={Logo} />
@@ -43,7 +33,6 @@ export default function App() {
         </TouchableOpacity>
         <StatusBar style="auto" />
       </View>
-    </NavigationContainer>
   );
 }
 
