@@ -6,21 +6,17 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 export default function RegisterScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [count, setCount] = useState(0);
 
     registerFunc = () => {
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-    // Signed in 
       const user = userCredential.user;
-      alert("Account created in successfully !")
-    // ...
+      alert("Account created in successfully !");
   })
       .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage)
-    // ..
+      alert(errorMessage);
   });
     }
     return (
@@ -46,9 +42,8 @@ export default function RegisterScreen({navigation}) {
           <Text>Forgot Password?</Text> 
         </TouchableOpacity>
         <TouchableOpacity style={styles.login}>
-          <Text style={styles.loginText} onPress={() => registerFunc}>Login</Text>
+          <Text style={styles.loginText} onPress={() => registerFunc}>Register</Text>
         </TouchableOpacity>
-        <Text>You clicked me {count} times</Text>
         <StatusBar style="auto" />
       </View>
     );

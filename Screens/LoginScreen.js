@@ -1,23 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { React, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import {getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [count, setCount] = useState(0);
 
     loginFunc = () => {
-      createUserWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       const user = userCredential.user;
-      alert("Logged in successfully !")
+      alert("Logged in successfully !");
   })
       .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage)
+      alert(errorMessage);
   });
     }
     return (
@@ -28,8 +27,8 @@ export default function LoginScreen({navigation}) {
             placeholder="Email"
             placeholderTextColor="white"
             onChangeText={(email) => setEmail(email)}
-          /> 
-        </View> 
+          />
+        </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
@@ -37,13 +36,18 @@ export default function LoginScreen({navigation}) {
             placeholderTextColor="white"
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
-          /> 
+          />
         </View>
-        <TouchableOpacity  style={styles.forgot}>
-          <Text>Forgot Password?</Text> 
+        <TouchableOpacity
+          style={styles.forgot}
+          onPress={navigation.navigate("Forgot")}
+        >
+          <Text>Forgot Password?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.login}>
-          <Text style={styles.loginText} onPress={() => loginFunc}>Login</Text>
+          <Text style={styles.loginText} onPress={() => loginFunc}>
+            Login
+          </Text>
         </TouchableOpacity>
         <StatusBar style="auto" />
       </View>
