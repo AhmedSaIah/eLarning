@@ -1,24 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import { React } from "react";
-import { StyleSheet,ImageBackground, Text, View, TouchableOpacity } from "react-native";
-import image from "../assets/peakpx.jpg";
+import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="contain"></ImageBackground>
       <View style={styles.inputView}>
         <TouchableOpacity onPress={navigation.navigate("Login")}>
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.TextInput}>     Login     </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.inputView}>
-        <TouchableOpacity onPress={navigation.navigate("Register")}>
-          <Text style={styles.loginText}>Register</Text>
+        <TouchableOpacity onPress={navigation.navigate("Register")}> 
+          <Text style={styles.TextInput}>     Register      </Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={navigation.navigate("Forgot")}>
-        <Text style={styles.forgot}>Forgot Password?</Text>
+        <Text style={styles.forgot}>      Forgot Password?      </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -50,7 +48,8 @@ export default function HomeScreen({ navigation }) {
       flex: 1,
       padding: 10,
       marginLeft: 20,
-      fontSize: 15
+      fontSize: 15,
+      color: "white",
     },
     login:{
       width: "30%",

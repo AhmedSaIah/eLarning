@@ -3,10 +3,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { React } from "react";
 import { View } from "react-native";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import HomeScreen from "./screens/HomeScreen";
-import ForgotScreen from "./screens/ForgotScreen";
+import LoginScreen from "./Screens/LoginScreen";
+import RegisterScreen from "./Screens/RegisterScreen";
+import HomeScreen from "./Screens/HomeScreen";
+import ForgotScreen from "./Screens/ForgotScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
