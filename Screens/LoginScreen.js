@@ -40,12 +40,12 @@ export default function LoginScreen({navigation}) {
         </View>
         <TouchableOpacity
           style={styles.forgot}
-          onPress={navigation.navigate("Forgot")}
+          onPress={() => navigation.navigate("Forgot")}
         >
           <Text>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.login}>
-          <Text style={styles.loginText} onPress={() => loginFunc}>
+        <TouchableOpacity style={styles.login} onPress={() => loginFunc}>
+          <Text style={styles.loginText}>
             Login
           </Text>
         </TouchableOpacity>

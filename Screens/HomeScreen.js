@@ -1,21 +1,25 @@
 import { StatusBar } from "expo-status-bar";
 import { React } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from "react-native";
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <ImageBackground
+      style={styles.background}
+      source={require("../assets/talabatlogo.png")}>
+      </ImageBackground>
       <View style={styles.inputView}>
-        <TouchableOpacity onPress={navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
           <Text style={styles.TextInput}>     Login     </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.inputView}>
-        <TouchableOpacity onPress={navigation.navigate("Register")}> 
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}> 
           <Text style={styles.TextInput}>     Register      </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={navigation.navigate("Forgot")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
         <Text style={styles.forgot}>      Forgot Password?      </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
@@ -34,6 +38,14 @@ export default function HomeScreen({ navigation }) {
       aspectRatio: 2/1,
       alignItems: 'center',
       marginBottom: 40,
+    },
+    background:{
+      marginLeft:20,
+      marginBottom:20,
+      height: 80,
+      width: "95%",
+      alignItems: 'stretch',
+    
     },
     inputView: {
       backgroundColor: "#FF7000",

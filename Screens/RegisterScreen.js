@@ -38,11 +38,11 @@ export default function RegisterScreen({navigation}) {
             onChangeText={(password) => setPassword(password)}
           /> 
         </View>
-        <TouchableOpacity  style={styles.forgot} onPress={() => navigation.navigation("ForgotPass")}>
+        <TouchableOpacity  style={styles.forgot} onPress={() => navigation.navigate("Forgot")}>
           <Text>Forgot Password?</Text> 
         </TouchableOpacity>
-        <TouchableOpacity style={styles.login}>
-          <Text style={styles.loginText} onPress={() => registerFunc}>Register</Text>
+          <TouchableOpacity style={styles.login} onPress={() => registerFunc}>
+          <Text style={styles.loginText}>Register</Text>
         </TouchableOpacity>
         <StatusBar style="auto" />
       </View>
