@@ -2,10 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { React, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import {getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {login} from "../Firebase/auth";
 
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const auth = getAuth();
 
     loginFunc = () => {
       signInWithEmailAndPassword(auth, email, password)
@@ -44,7 +46,7 @@ export default function LoginScreen({navigation}) {
         >
           <Text>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.login} onPress={() => loginFunc}>
+        <TouchableOpacity style={styles.login} onPress={() => login}>
           <Text style={styles.loginText}>
             Login
           </Text>

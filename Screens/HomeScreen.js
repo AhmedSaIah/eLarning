@@ -19,9 +19,9 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.TextInput}>     Register      </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
         <Text style={styles.forgot}>      Forgot Password?      </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -45,7 +45,6 @@ export default function HomeScreen({ navigation }) {
       height: 80,
       width: "95%",
       alignItems: 'stretch',
-    
     },
     inputView: {
       backgroundColor: "#FF7000",

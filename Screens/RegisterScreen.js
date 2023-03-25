@@ -2,11 +2,33 @@ import { StatusBar } from 'expo-status-bar';
 import { React, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { register } from "../Firebase/auth";
 
 export default function RegisterScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const minNumberofChars = 6;
+    const maxNumberofChars = 16;
+    const namePattern = /^[a-zA-Z ]{2,30}$/;
+
+    function registerUser() {
+      if (email === '' || password === ''){
+        alert("Email or password is empty");
+      } else if (!emailPattern.test(email)){
+        alert("Please use a real email");
+      } else if (password < minNumberofChars || password > maxNumberofChars){
+        alert("Can not use this password");
+      } else if (password !== confirmPassword){
+        alert("Passwords doesn't match");
+      } else {
+        register(email, password).then(()=> {
+          navigation.navigate("Dashboard");
+        })
+      }
+    }
     registerFunc = () => {
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -38,10 +60,19 @@ export default function RegisterScreen({navigation}) {
             onChangeText={(password) => setPassword(password)}
           /> 
         </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Confirm Password"
+            placeholderTextColor="white"
+            secureTextEntry={true}
+            onChangeText={(password) => setConfirmPassword(password)}
+          /> 
+        </View>
         <TouchableOpacity  style={styles.forgot} onPress={() => navigation.navigate("Forgot")}>
           <Text>Forgot Password?</Text> 
         </TouchableOpacity>
-          <TouchableOpacity style={styles.login} onPress={() => registerFunc}>
+          <TouchableOpacity style={styles.login} onPress={() => {registerUser()}}>
           <Text style={styles.loginText}>Register</Text>
         </TouchableOpacity>
         <StatusBar style="auto" />
@@ -74,7 +105,8 @@ export default function RegisterScreen({navigation}) {
       flex: 1,
       padding: 10,
       marginLeft: 20,
-      fontSize: 15
+      fontSize: 15,
+      textAlign:'center'
     },
     login:{
       width: "30%",
