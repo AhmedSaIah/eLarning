@@ -1,4 +1,4 @@
-import { app } from "./config";
+import { app } from "./firebase-config";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-export const authentication = getAuth(app);
+export const auth = getAuth(app);
 
 // onAuthStateChanged(authentication, (user) => {
 //     if (user != null) {
@@ -19,37 +19,37 @@ export const authentication = getAuth(app);
 // });
 
 async function isSignedIn() {
-  console.log("from isSignedIn method: ", authentication.currentUser);
-  return (await authentication.currentUser) != null;
+  console.log("from isSignedIn method: ", auth.currentUser);
+  return (await auth.currentUser) != null;
 }
 
 async function getUserUId() {
-  if (authentication.currentUser != null) {
-    return authentication.currentUser.uid;
+  if (auth.currentUser != null) {
+    return auth.currentUser.uid;
   } else {
     return null;
   }
 }
 
 async function getUserToken() {
-  if (authentication.currentUser != null) {
-    return await authentication.currentUser.getIdToken();
+  if (auth.currentUser != null) {
+    return await auth.currentUser.getIdToken();
   }
   return null;
 }
 
 async function register(email, password) {
-  console.log("register method with email=", email, " and password=", password);
-  await createUserWithEmailAndPassword(authentication, email, password);
+  console.log("Register called successfully email=", email, " and password=", password);
+  await createUserWithEmailAndPassword(auth, email, password);
 }
 
 async function login(email, password) {
-  console.log("login method with email=", email, " and password=", password);
-  await signInWithEmailAndPassword(authentication, email, password);
+  console.log("Login called successfully email=", email, " and password=", password);
+  await signInWithEmailAndPassword(auth, email, password);
 }
 
 async function restPassword(email) {
-  await sendPasswordResetEmail(authentication, email);
+  await sendPasswordResetEmail(auth, email);
 }
 
 async function singinWithSocial(provider) {
