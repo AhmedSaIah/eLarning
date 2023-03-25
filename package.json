@@ -1,6 +1,7 @@
 {
   "name": "loginlayout",
   "version": "1.0.0",
+  "license": "abo7nez",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
