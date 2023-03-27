@@ -1,15 +1,35 @@
 import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-export default function ForgotScreen() {
+export default function ForgotScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-      <View style={styles.container}>
-        <StatusBar style="auto" />
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.headerText}>Find your talabat account</Text>
       </View>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Email or username"
+          placeholderTextColor="white"
+          onChangeText={(email) => setEmail(email)}
+        />
+      </View>
+      <TouchableOpacity style={styles.btn}>
+        <Text>Next</Text>
+      </TouchableOpacity>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 
@@ -25,13 +45,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 40,
   },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 20,
+    marginBottom: 15,
+  },
   inputView: {
     backgroundColor: "#FF7000",
     borderRadius: 30,
-    width: "85%",
+    width: "90%",
     height: 45,
     marginBottom: 20,
-    padding: 10,
     alignItems: "center",
   },
   TextInput: {
@@ -40,16 +64,16 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 20,
     fontSize: 15,
+    textAlign: "center",
   },
-  login: {
-    width: "30%",
+  btn: {
+    width: "35%",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 20,
     backgroundColor: "#FF7000",
-    color: "white",
   },
   forgot: {
     height: 30,

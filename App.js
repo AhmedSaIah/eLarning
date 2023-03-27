@@ -10,7 +10,7 @@ import ForgotScreen from "./Screens/ForgotScreen";
 import DashboardScreen from "./Screens/DashboardScreen";
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function App({}) {
   return (
     <NavigationContainer>
       <Stack.Navigator>

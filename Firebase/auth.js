@@ -39,12 +39,12 @@ async function getUserToken() {
 }
 
 async function register(email, password) {
-  console.log("Register called successfully email=", email, " and password=", password);
+  console.log("Register called successfully with email=", email, " and password=", password);
   await createUserWithEmailAndPassword(auth, email, password);
 }
 
 async function login(email, password) {
-  console.log("Login called successfully email=", email, " and password=", password);
+  console.log("Login called successfully with email=", email, " and password=", password);
   await signInWithEmailAndPassword(auth, email, password);
 }
 
@@ -53,11 +53,11 @@ async function restPassword(email) {
 }
 
 async function singinWithSocial(provider) {
-  await signInWithPopup(authentication, provider);
+  await signInWithPopup(auth, provider);
 }
 
 async function logout() {
-  authentication
+  auth
     .signOut()
     .then()
     .catch((e) => console.log(e.message));
