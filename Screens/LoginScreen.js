@@ -12,20 +12,19 @@ import { login } from "../Firebase/auth";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const adminEmail = "ahmedsalah5446@gmail.com";
-  const adminPassword = "123456789";
-
-  async function signInUser() {
-    if (login(adminEmail, adminPassword)) {
-      // TODO: Implement an admin authority
-      navigation.navigate("Dashboard");
-    }
+  // const adminEmail = "";
+  // const adminPassword = "";
+  function signInUser() {
+    // if (login(adminEmail, adminPassword)) {
+    //    TODO: Implement admin authority
+    //   navigation.navigate("Dashboard");
+    // }
     login(email, password)
       .then(() => {
-        navigation.navigate("Home");
+        navigation.navigate("Dashboard");
       })
       .catch((e) => {
-        alert("Something went wrong while logging you in: ", e.message);
+        alert("Something went wrong while logging you in ", e.message);
         navigation.navigate("Login");
         console.log("Error logging user in: ", e.message);
       });
@@ -38,6 +37,7 @@ export default function LoginScreen({ navigation }) {
           style={styles.TextInput}
           placeholder="Email"
           placeholderTextColor="white"
+          autoFocus= {true}
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -57,7 +57,7 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.login} onPress={() => signInUser()}>
-        <Text>Login</Text>
+        <Text style={styles.textStyle}>Login</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -92,18 +92,22 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: "center",
   },
-  login: {
-    width: "30%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#FF7000",
+  textStyle:{
     color: "white",
+    fontSize: 15,
+  },
+  login: {
+    alignItems: "center",
+    width: "35%",
+    height: 40,
+    borderRadius: 30,
+    backgroundColor: "#FF7000",
+    textAlign: 'center',
+    padding: 10
   },
   forgot: {
     height: 30,
-    marginBottom: 30,
+    marginBottom: 20,
+    fontWeight: "bold"
   },
 });

@@ -49,10 +49,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   background:{
-    marginLeft:20,
-    marginBottom:20,
-    height: 82,
-    width: "95%",
+    height: 61,
+    width: "82%",
+    marginLeft: 50,
+    marginBottom: 20,
+    resizeMode: "cover",
   },
   inputView: {
     backgroundColor: "#FF7000",
