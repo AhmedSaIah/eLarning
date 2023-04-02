@@ -12,18 +12,14 @@ export default function HomeScreen({ navigation }) {
       <View>
         <Text style={styles.headerText}>Already a user?</Text>
       </View>
-      <View style={styles.inputView}>
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.TextInput}>       Login      </Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-      </View>
-      <View style={styles.inputView}>
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}> 
-          <Text style={styles.TextInput}>       Register        </Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("Register")}> 
+          <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-      </View>
       <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
-        <Text style={styles.forgot}>        Forgot Password?        </Text>
+        <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -55,16 +51,21 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     resizeMode: "cover",
   },
-  inputView: {
-    backgroundColor: "#FF7000",
-    borderRadius: 10,
-    fontWeight: "bold",
-    fontSize: 50,
-    width: "90%",
+  buttonContainer: {
+    margin: 10,
     height: 45,
-    marginBottom: 20,
-    padding: 10,
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
+    marginBottom: 20,
+    width: "85%",
+    borderRadius: 10,
+    backgroundColor: "#FF7000",
+  },
+  buttonText: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 18, 
   },
   TextInput: {
     marginLeft: 20,
@@ -72,16 +73,6 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign:"left",
     fontWeight: "bold",
-  },
-  login: {
-    width: "30%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#FF7000",
-    color: "white",
   },
   forgot: {
     height: 30,

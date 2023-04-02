@@ -7,10 +7,23 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { resetPassword } from "../Firebase/auth";
 
 export default function ForgotScreen({ navigation }) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [sent, setSent] = useState(false);
+
+  function forgetPassword() {
+    resetPassword(email)
+      .then(() => {
+        setSent(true);
+        alert("An email has been sent to reset your password");
+        navigation.navigate("Login");
+      })
+      .catch((e) => {
+        alert("Error", e.message);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -20,13 +33,13 @@ export default function ForgotScreen({ navigation }) {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Email or username"
+          placeholder="Email"
           placeholderTextColor="white"
           onChangeText={(email) => setEmail(email)}
         />
       </View>
-      <TouchableOpacity style={styles.btn}>
-        <Text>Next</Text>
+      <TouchableOpacity style={styles.btn} onPress={() => forgetPassword()}>
+        <Text style={styles.textStyle}>Send password reset link</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -46,16 +59,20 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   headerText: {
-    fontWeight: "bold",
-    fontSize: 20,
+    fontWeight: "600",
+    fontSize: 18,
     marginBottom: 15,
+  },
+  textStyle:{
+    color: "white",
+    fontSize: 15,
   },
   inputView: {
     backgroundColor: "#FF7000",
-    borderRadius: 30,
-    width: "90%",
+    borderRadius: 10,
+    width: "85%",
     height: 45,
-    marginBottom: 20,
+    marginBottom: 15,
     alignItems: "center",
   },
   TextInput: {
@@ -63,13 +80,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginLeft: 20,
-    fontSize: 15,
+    fontSize: 18,
     textAlign: "center",
   },
   btn: {
-    width: "35%",
-    borderRadius: 25,
-    height: 50,
+    width: "45%",
+    borderRadius: 10,
+    height: 45,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,

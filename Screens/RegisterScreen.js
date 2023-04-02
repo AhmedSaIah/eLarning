@@ -13,22 +13,29 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  // const [displayName, setDisplayName] = useState("");
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const minNumberofChars = 6;
-  const maxNumberofChars = 16;
-  const namePattern = /^[a-zA-Z ]{2,30}$/;
+  // const minNumberofChars = 6;
+  // const maxNumberofChars = 16;
+  // const namePattern = /^[a-zA-Z ]{2,30}$/;
 
   function registerUser() {
     if (email === "" || password === "") {
-      alert("Email or password is empty");
+      alert("Email or password or username is empty");
     } else if (!emailPattern.test(email)) {
       alert("Please use a real email");
-    } else if (password < minNumberofChars || password > maxNumberofChars) {
-      // Something is wrong in this case
-      alert("Can not use this password");
-    } else if (password !== confirmPassword) {
+    }
+    // else if (password < minNumberofChars || password > maxNumberofChars) {
+    //   // Something is wrong in this case
+    //   alert("Can not use this password");
+    // }
+    else if (password !== confirmPassword) {
       alert("Passwords doesn't match");
-    } else {
+    } 
+    // else if (!namePattern.test(displayName)) {
+    //   alert("Invalid display name!");
+    // } 
+    else {
       register(email, password).then(() => {
         navigation.navigate("Login");
       });
@@ -43,15 +50,27 @@ export default function RegisterScreen({ navigation }) {
           placeholder="Email"
           placeholderTextColor="white"
           autoFocus={true}
+          cursorColor={"white"}
           onChangeText={(email) => setEmail(email)}
         />
       </View>
+      {/* <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Display Name"
+          placeholderTextColor="white"
+          cursorColor={"white"}
+          autoCapitalize="words"
+          onChangeText={(displayName) => setDisplayName(displayName)}
+        />
+      </View> */}
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
           placeholder="Password"
           placeholderTextColor="white"
           secureTextEntry={true}
+          cursorColor={"white"}
           onChangeText={(password) => setPassword(password)}
         />
       </View>
@@ -61,6 +80,7 @@ export default function RegisterScreen({ navigation }) {
           placeholder="Confirm Password"
           placeholderTextColor="white"
           secureTextEntry={true}
+          cursorColor={"white"}
           onChangeText={(password) => setConfirmPassword(password)}
         />
       </View>
@@ -93,15 +113,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
   },
-  logo: {
-    aspectRatio: 2 / 1,
-    alignItems: "center",
-    marginBottom: 40,
-  },
   inputView: {
     backgroundColor: "#FF7000",
-    borderRadius: 30,
-    width: "90%",
+    borderRadius: 10,
+    width: "85%",
     height: 45,
     marginBottom: 20,
     alignItems: "center",
@@ -116,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "35%",
     height: 40,
-    borderRadius: 30,
+    borderRadius: 15,
     backgroundColor: "#FF7000",
     textAlign: "center",
     padding: 10,
