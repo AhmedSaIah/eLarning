@@ -50,7 +50,8 @@ async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
 
-async function restPassword(email) {
+async function resetPassword(email) {
+  console.log("ResetPassword called to reset =", email);
   await sendPasswordResetEmail(auth, email);
 }
 
@@ -69,7 +70,7 @@ export {
   register,
   login,
   isSignedIn,
-  restPassword,
+  resetPassword,
   getUserUId,
   logout,
   getUserToken,
