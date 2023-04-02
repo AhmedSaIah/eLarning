@@ -5,17 +5,19 @@ import {
   getAuth,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithPopup,x
 } from "firebase/auth";
 
 export const auth = getAuth(app);
 
-// onAuthStateChanged(authentication, (user) => {
-//     if (user != null) {
-//         console.log("authorized user: ", user);
-//         console.log(authentication.currentUser)
+// onAuthStateChanged(auth, (user) => {
+//     if ( user ) {
+//       const email = user.email;
+
+//       console.log("Authorized user email: ", email);
+//       console.log(auth.currentUser);
 //     }
-//     console.log('isSignedIn=', isSignedIn())
+//     console.log("isSignedIn= ", isSignedIn());
 // });
 
 async function isSignedIn() {
