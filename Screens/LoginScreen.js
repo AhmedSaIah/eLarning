@@ -1,13 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import {
-  StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
 } from "react-native";
 import { login } from "../Firebase/auth";
+import { COLORS } from "../assets/COLORS";
+import {globalStyles} from "../styles/style";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -31,76 +32,36 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputView}>
+    <View style={globalStyles.container}>
+      <View style={globalStyles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={globalStyles.TextInput}
           placeholder="Email"
-          placeholderTextColor="white"
+          placeholderTextColor="black"
+          cursorColor={COLORS.orange}
           autoFocus= {true}
           onChangeText={(email) => setEmail(email)}
         />
       </View>
-      <View style={styles.inputView}>
+      <View style={globalStyles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={globalStyles.TextInput}
           placeholder="Password"
-          placeholderTextColor="white"
+          placeholderTextColor="black"
+          cursorColor={COLORS.orange}
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
       </View>
       <TouchableOpacity
-        style={styles.forgot}
         onPress={() => navigation.navigate("Forgot")}
       >
-        <Text style={styles.forgot}>Forgot Password?</Text>
+        <Text style={globalStyles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.login} onPress={() => signInUser()}>
-        <Text style={styles.textStyle}>Login</Text>
+      <TouchableOpacity style={globalStyles.login} onPress={() => signInUser()}>
+        <Text style={globalStyles.textStyle}>Login</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputView: {
-    backgroundColor: "#FF7000",
-    borderRadius: 10,
-    width: "85%",
-    height: 45,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  TextInput: {
-    flex: 1,
-    fontSize: 18,
-    textAlign: "center",
-    color: "white",
-  },
-  textStyle:{
-    color: "white",
-    fontSize: 15,
-  },
-  login: {
-    alignItems: "center",
-    width: "35%",
-    height: 40,
-    borderRadius: 15,
-    backgroundColor: "#FF7000",
-    textAlign: 'center',
-    padding: 10
-  },
-  forgot: {
-    height: 30,
-    marginBottom: 20,
-    fontWeight: "bold"
-  },
-});
