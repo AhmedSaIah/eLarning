@@ -39,7 +39,7 @@ export default function ForgotScreen({ navigation }) {
         />
       </View>
       <TouchableOpacity style={styles.btn} onPress={() => forgetPassword()}>
-        <Text style={styles.textStyle}>Send password reset link</Text>
+        <Text style={styles.textStyle}>Reset password</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 18,
     textAlign: "center",
+    color: "white"
   },
   btn: {
     width: "45%",

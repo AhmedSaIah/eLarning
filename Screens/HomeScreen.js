@@ -7,7 +7,7 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <ImageBackground
       style={styles.background}
-      source={require("../assets/talabatlogo.png")}>
+      source={require("../assets/eLearn.jpg")}>
       </ImageBackground>
       <View>
         <Text style={styles.headerText}>Already a user?</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   background:{
-    height: 61,
+    height: 150,
     width: "82%",
     marginLeft: 50,
     marginBottom: 20,

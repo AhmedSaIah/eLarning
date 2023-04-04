@@ -85,12 +85,7 @@ export default function RegisterScreen({ navigation }) {
         />
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Forgot")}
-      >
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.login}
+        style={styles.registerBtn}
         onPress={() => {
           registerUser();
         }}
@@ -127,7 +122,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
   },
-  login: {
+  registerBtn: {
     alignItems: "center",
     width: "35%",
     height: 40,
@@ -135,10 +130,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF7000",
     textAlign: "center",
     padding: 10,
-  },
-  forgot: {
-    height: 30,
-    marginBottom: 20,
-    fontWeight: "bold",
+    marginVertical: 30
   },
 });

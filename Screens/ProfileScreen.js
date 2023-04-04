@@ -6,10 +6,12 @@ import { logout } from "../Firebase/auth";
 import COLORS from "../assets/COLORS";
 
 export default function ProfileScreen({ navigation }) {
+
   async function logoutUser() {
-    logout();
+    await logout();
     navigation.navigate("Home");
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}></View>
