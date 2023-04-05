@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import { React } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import { auth } from "../Firebase/firebase-config";
 import { logout } from "../Firebase/auth";
-import COLORS from "../assets/COLORS";
+import {globalStyles} from "../styles/style";
 
 export default function ProfileScreen({ navigation }) {
 
@@ -13,68 +13,22 @@ export default function ProfileScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}></View>
+    <View style={globalStyles.profileContainer}>
+      <View style={globalStyles.header}></View>
       <Image
-        style={styles.avatar}
+        style={globalStyles.avatar}
         source={{
           uri: "https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png",
         }}
       />
-      <Text style={styles.TextInput}>{auth.currentUser.email}</Text>
+      <Text style={globalStyles.textProfile}>{auth.currentUser.email}</Text>
       <TouchableOpacity
-        style={styles.buttonContainer}
+        style={globalStyles.buttonContainer}
         onPress={() => logoutUser()}
       >
-        <Text style={styles.buttonText}>Logout</Text>
+        <Text style={globalStyles.buttonText}>Logout</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
-  },
-  TextInput: {
-    padding: 10,
-    paddingTop: 55,
-    marginLeft: 20,
-    fontSize: 20,
-    fontWeight: "bold"
-  },
-  buttonContainer: {
-    margin: 10,
-    height: 45,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 15,
-    backgroundColor: COLORS.orange,
-  },
-  buttonText: {
-    color: "#FFF",
-    fontWeight: "bold",
-    fontSize: 15, 
-  },
-  avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom: 10,
-    alignSelf: "center",
-    position: "absolute",
-    marginTop: 130,
-  },
-  header:{
-    backgroundColor: COLORS.black,
-    height:200,
-  },
-});

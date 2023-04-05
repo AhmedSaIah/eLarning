@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { register } from "../Firebase/auth";
+import { COLORS } from "../assets/COLORS";
+import { globalStyles } from "../styles/style"
 
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -43,14 +45,14 @@ export default function RegisterScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputView}>
+    <View style={globalStyles.container}>
+      <View style={globalStyles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={globalStyles.TextInput}
           placeholder="Email"
-          placeholderTextColor="white"
+          placeholderTextColor={COLORS.black}
           autoFocus={true}
-          cursorColor={"white"}
+          cursorColor={COLORS.black}
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -64,33 +66,33 @@ export default function RegisterScreen({ navigation }) {
           onChangeText={(displayName) => setDisplayName(displayName)}
         />
       </View> */}
-      <View style={styles.inputView}>
+      <View style={globalStyles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={globalStyles.TextInput}
           placeholder="Password"
-          placeholderTextColor="white"
+          placeholderTextColor={COLORS.black}
           secureTextEntry={true}
-          cursorColor={"white"}
+          cursorColor={COLORS.black}
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-      <View style={styles.inputView}>
+      <View style={globalStyles.inputView}>
         <TextInput
-          style={styles.TextInput}
+          style={globalStyles.TextInput}
           placeholder="Confirm Password"
-          placeholderTextColor="white"
+          placeholderTextColor={COLORS.black}
           secureTextEntry={true}
-          cursorColor={"white"}
+          cursorColor={COLORS.black}
           onChangeText={(password) => setConfirmPassword(password)}
         />
       </View>
       <TouchableOpacity
-        style={styles.registerBtn}
+        style={globalStyles.registerBtn}
         onPress={() => {
           registerUser();
         }}
       >
-        <Text style={styles.textStyle}>Register</Text>
+        <Text style={globalStyles.textStyle}>Register</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
