@@ -2,6 +2,8 @@ import { StyleSheet } from "react-native";
 import {COLORS} from "../assets/COLORS";
 
 export const globalStyles = StyleSheet.create({
+  // RegisterScreen & LoginScreen
+
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
@@ -24,7 +26,7 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
     color: COLORS.black,
   },
-  textStyle:{
+  textStyle: {
     color: "white",
     fontSize: 15,
   },
@@ -34,13 +36,13 @@ export const globalStyles = StyleSheet.create({
     height: 40,
     borderRadius: 15,
     backgroundColor: COLORS.orange,
-    textAlign: 'center',
-    padding: 10
+    textAlign: "center",
+    padding: 10,
   },
   forgot: {
     height: 30,
     marginBottom: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   registerBtn: {
     alignItems: "center",
@@ -50,10 +52,10 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: COLORS.orange,
     textAlign: "center",
     padding: 10,
-    marginVertical: 30
+    marginVertical: 30,
   },
 
-//   ProfileScreen
+  //   ProfileScreen
 
   avatar: {
     width: 130,
@@ -66,9 +68,9 @@ export const globalStyles = StyleSheet.create({
     position: "absolute",
     marginTop: 130,
   },
-  header:{
+  header: {
     backgroundColor: COLORS.black,
-    height:200,
+    height: 200,
   },
   profileContainer: {
     flex: 1,
@@ -80,7 +82,7 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 55,
     marginLeft: 20,
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonContainer: {
     margin: 10,
@@ -96,24 +98,24 @@ export const globalStyles = StyleSheet.create({
   buttonText: {
     color: COLORS.white,
     fontWeight: "bold",
-    fontSize: 15, 
+    fontSize: 15,
   },
 
-//   HomeScreen
+  //   HomeScreen & ForgotScreen - container
 
-homeContainer: {
+  homeContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "left",
   },
-headerText: {
+  headerText: {
     fontWeight: "bold",
     fontSize: 20,
     marginBottom: 15,
   },
-  background:{
+  background: {
     height: 150,
     width: "82%",
     marginLeft: 50,
@@ -134,14 +136,8 @@ headerText: {
   btnText: {
     color: COLORS.white,
     fontWeight: "bold",
-    fontSize: 18, 
+    fontSize: 18,
   },
-
-// ForgotScreen
-
-
-
 })
-
 
 export default globalStyles;

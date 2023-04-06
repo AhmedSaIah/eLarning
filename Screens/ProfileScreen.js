@@ -3,10 +3,9 @@ import { React } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { auth } from "../Firebase/firebase-config";
 import { logout } from "../Firebase/auth";
-import {globalStyles} from "../styles/style";
+import { globalStyles } from "../styles/style";
 
 export default function ProfileScreen({ navigation }) {
-
   async function logoutUser() {
     await logout();
     navigation.navigate("Home");
