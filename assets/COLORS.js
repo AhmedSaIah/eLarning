@@ -5,6 +5,7 @@ export const COLORS = {
     white : '#F2F6F9',
     orange : '#FF6905',
     black : '#0A0A0A',
+    darkOrange: '#DD4B39',
 };
 
 export default COLORS;
