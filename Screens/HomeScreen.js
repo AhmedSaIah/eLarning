@@ -1,28 +1,45 @@
-import { StatusBar } from "expo-status-bar";
 import { React } from "react";
-import { ImageBackground, Text, View, TouchableOpacity } from "react-native";
-import {globalStyles} from "../styles/style";
+import { ImageBackground, Text, View } from "react-native";
+import { Title, Subheading } from "react-native-paper";
+import { globalStyles } from "../styles/style";
+import GButton from "../Components/GButton";
+import COLORS from "../assets/COLORS";
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={globalStyles.homeContainer}>
+      <View style={globalStyles.imagesView}>
       <ImageBackground
-      style={globalStyles.background}
-      source={require("../assets/eLearn.jpg")}>
-      </ImageBackground>
-      <View>
-        <Text style={globalStyles.headerText}>Already a user?</Text>
+        style={globalStyles.leftLogo}
+        source={require("../assets/Icon.png")}
+      />
+      <ImageBackground
+        style={globalStyles.rightLogo}
+        source={require("../assets/restIcon.png")}
+      />
       </View>
-        <TouchableOpacity style={globalStyles.btnContainer} onPress={() => navigation.navigate("Login")}>
-          <Text style={globalStyles.btnText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={globalStyles.btnContainer} onPress={() => navigation.navigate("Register")}> 
-          <Text style={globalStyles.btnText}>Register</Text>
-        </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
-        <Text style={globalStyles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
+        <Title style={globalStyles.Title}>Keeper</Title>
+        <Subheading>Learning platform</Subheading>
+      <GButton
+        mode="contained"
+        labelStyle={globalStyles.btnText}
+        title={"Login"}
+        buttonColor={COLORS.primary}
+        textColor={COLORS.white}
+        onPress={() => {
+          navigation.navigate("Login");
+        }}
+      />
+      <GButton
+        mode="outlined"
+        labelStyle={globalStyles.btnText}
+        title={"Create Account"}
+        buttonColor={COLORS.white}
+        textColor={COLORS.primary}
+        onPress={() => {
+          navigation.navigate("Register");
+        }}
+      />
     </View>
   );
 }

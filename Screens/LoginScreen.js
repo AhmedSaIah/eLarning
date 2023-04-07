@@ -1,6 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
 import {
+  Alert,
   Text,
   View,
   StyleSheet,
@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { login } from "../Firebase/auth";
-import { COLORS } from "../assets/COLORS";
+import COLORS from "../assets/COLORS";
 import { Title, Subheading, TextInput } from "react-native-paper";
 import GButton from "../Components/GButton";
 import GInput from "../Components/GInput";
+import globalStyles from "../styles/style";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ export default function LoginScreen({ navigation }) {
         navigation.navigate("Profile");
       })
       .catch((e) => {
-        alert("Something went wrong while logging you in ", e.message);
+        Alert.alert("Something went wrong", e.message);
         console.log("Error logging user in: ", e.message);
       });
   }
@@ -43,15 +44,15 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }}>
-      <View style={styles.container} onPress={Keyboard.dismiss}>
-        <Title style={styles.Title}>Welcome Back!</Title>
+      <View style={globalStyles.container} onPress={Keyboard.dismiss}>
+        <Title style={globalStyles.Title}>Welcome Back!</Title>
+
         <Subheading>Login to continue</Subheading>
 
         <View style={{ paddingTop: 50 }}>
           <GInput
             modeValue={"outlined"}
             labelName={"Email"}
-            placeholder="user@gmail.com"
             onChangeText={setEmail}
             value={email}
           />
@@ -60,9 +61,13 @@ export default function LoginScreen({ navigation }) {
             modeValue={"outlined"}
             labelName={"Password"}
             secureTextEntry={secureText}
-            // Fix eye not showing 
+            // Fix eye not showing
             right={
-              <TextInput.Icon name={secureText ? "eye" : "eye-off"} color={color} onPress={onPress} />
+              <TextInput.Icon
+                name={secureText ? "eye" : "eye-off"}
+                color={color}
+                onPress={onPress}
+              />
             }
             onChangeText={setPassword}
             value={password}
@@ -71,41 +76,45 @@ export default function LoginScreen({ navigation }) {
           <GButton
             mode="text"
             labelStyle={[
-              styles.ContinuesButtonLabel,
+              globalStyles.btnText,
               { textDecorationLine: "underline" },
             ]}
+            textColor={COLORS.black}
             title={"Forgot Password ?"}
             onPress={() => navigation.navigate("Forgot")}
           />
 
           <GButton
             mode="contained"
-            labelStyle={styles.ContinuesButtonLabel}
+            labelStyle={globalStyles.btnText}
             title={"Login"}
             buttonColor={COLORS.primary}
-            textColor = {COLORS.white}
-            onPress={() => {signInUser()}}
+            textColor={COLORS.white}
+            onPress={() => {
+              signInUser();
+            }}
           />
         </View>
 
         <Text style={styles.Text}>OR</Text>
 
         <GButton
-            mode = "outlined"
-            icon={"facebook"}
-            labelStyle={styles.ContinuesButtonLabel}
-            title={"Login With Facebook"}
-            buttonColor = {COLORS.secondary}
-            textColor = {COLORS.primary}
+          mode="outlined"
+          icon={"facebook"}
+          labelStyle={globalStyles.btnText}
+          title={"Login With Facebook"}
+          buttonColor={COLORS.white}
+          textColor={COLORS.primary}
         />
+
         <GButton
-            mode = "outlined"
-            icon={"google"}
-            labelStyle={styles.ContinuesButtonLabel}
-            title={"Login With Google"}
-            buttonColor = {COLORS.secondary}
-            textColor = {COLORS.darkOrange}
-        /> 
+          mode="outlined"
+          icon={"google"}
+          labelStyle={globalStyles.btnText}
+          title={"Login With Google"}
+          buttonColor={COLORS.white}
+          textColor={COLORS.darkOrange}
+        />
 
         <View
           style={{
@@ -116,9 +125,7 @@ export default function LoginScreen({ navigation }) {
             marginBottom: 20,
           }}
         >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Register")}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
             <Text style={{ color: COLORS.primary, fontWeight: "bold" }}>
               Create Account
             </Text>
@@ -130,18 +137,6 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.white,
-    flex: 1,
-    alignItems: "center",
-  },
-
-  Title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    paddingTop: 50,
-  },
-
   ContinuesButtonLabel: {
     fontSize: 14,
   },

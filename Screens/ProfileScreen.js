@@ -1,12 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import { React } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, Image } from "react-native";
 import { auth } from "../Firebase/firebase-config";
 import { logout } from "../Firebase/auth";
 import { globalStyles } from "../styles/style";
+import GButton from "../Components/GButton";
+import COLORS from "../assets/COLORS";
 
 export default function ProfileScreen({ navigation }) {
-  async function logoutUser() {
+  async function signOut() {
     await logout();
     navigation.navigate("Home");
   }
@@ -21,13 +22,14 @@ export default function ProfileScreen({ navigation }) {
         }}
       />
       <Text style={globalStyles.textProfile}>{auth.currentUser.email}</Text>
-      <TouchableOpacity
-        style={globalStyles.buttonContainer}
-        onPress={() => logoutUser()}
-      >
-        <Text style={globalStyles.buttonText}>Logout</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
+      <GButton
+        mode="contained"
+        labelStyle={globalStyles.btnText}
+        title={"SignOut"}
+        buttonColor={COLORS.primary}
+        textColor={COLORS.white}
+        onPress={() => signOut()}
+      />
     </View>
   );
 }
