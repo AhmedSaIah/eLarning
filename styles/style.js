@@ -13,8 +13,8 @@ export const globalStyles = StyleSheet.create({
   inputView: {
     backgroundColor: COLORS.white,
     borderRadius: 10,
-    borderColor: COLORS.orange,
-    borderWidth: 2.2,
+    borderColor: COLORS.black,
+    borderWidth: 1,
     width: "85%",
     height: 45,
     marginBottom: 20,
@@ -71,10 +71,12 @@ export const globalStyles = StyleSheet.create({
   header: {
     backgroundColor: COLORS.black,
     height: 200,
+    width: 400,
   },
   profileContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
+    alignItems: "center",
     padding: 10,
   },
   textProfile: {
@@ -108,36 +110,47 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
-    textAlign: "left",
   },
   headerText: {
     fontWeight: "bold",
     fontSize: 20,
-    marginBottom: 15,
+    marginVertical: 15,
   },
-  background: {
-    height: 150,
-    width: "82%",
-    marginLeft: 50,
-    marginBottom: 20,
-    resizeMode: "cover",
+  imagesView: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  leftLogo: {
+    height: 95,
+    width: 73,
+    marginRight: 15,
+    marginHorizontal: 30,
+  },
+  rightLogo: {
+    height: 95,
+    width: 95,
+    marginLeft: 15,
   },
   btnContainer: {
     margin: 10,
-    height: 45,
+    height: 60,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 10,
     width: "85%",
     borderRadius: 10,
-    backgroundColor: COLORS.orange,
+    backgroundColor: COLORS.primary,
   },
   btnText: {
-    color: COLORS.white,
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 14,
   },
-})
+  Title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    paddingTop: 50,
+  },
+});
 
 export default globalStyles;

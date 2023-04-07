@@ -6,23 +6,26 @@ const {width, height} = Dimensions.get('screen');
 
 export default function GButton({title, icon, modeValue, color, ...rest}) {
     return (
-        <Button
-            mode = {modeValue}
-            {...rest}
-            icon = {icon}
-            style = {styles.button}
-            contentStyle = {styles.buttonContainer}>
-            {title}
-        </Button>
+      <Button
+        mode={modeValue}
+        {...rest}
+        icon={icon}
+        style={styles.button}
+        contentStyle={styles.buttonContainer}
+      >
+        {title}
+      </Button>
     );
 }
 
 const styles = StyleSheet.create({
     button: {
         marginTop: 10,
+        borderRadius: 10,
     },
     buttonContainer: {
         width: width*0.85,
         height: height/17,
+
     },
 });
