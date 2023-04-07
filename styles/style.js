@@ -2,6 +2,8 @@ import { StyleSheet } from "react-native";
 import {COLORS} from "../assets/COLORS";
 
 export const globalStyles = StyleSheet.create({
+  // RegisterScreen & LoginScreen
+
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
@@ -11,8 +13,8 @@ export const globalStyles = StyleSheet.create({
   inputView: {
     backgroundColor: COLORS.white,
     borderRadius: 10,
-    borderColor: COLORS.orange,
-    borderWidth: 2.2,
+    borderColor: COLORS.black,
+    borderWidth: 1,
     width: "85%",
     height: 45,
     marginBottom: 20,
@@ -24,7 +26,7 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
     color: COLORS.black,
   },
-  textStyle:{
+  textStyle: {
     color: "white",
     fontSize: 15,
   },
@@ -34,13 +36,13 @@ export const globalStyles = StyleSheet.create({
     height: 40,
     borderRadius: 15,
     backgroundColor: COLORS.orange,
-    textAlign: 'center',
-    padding: 10
+    textAlign: "center",
+    padding: 10,
   },
   forgot: {
     height: 30,
     marginBottom: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   registerBtn: {
     alignItems: "center",
@@ -50,10 +52,10 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: COLORS.orange,
     textAlign: "center",
     padding: 10,
-    marginVertical: 30
+    marginVertical: 30,
   },
 
-//   ProfileScreen
+  //   ProfileScreen
 
   avatar: {
     width: 130,
@@ -66,13 +68,15 @@ export const globalStyles = StyleSheet.create({
     position: "absolute",
     marginTop: 130,
   },
-  header:{
+  header: {
     backgroundColor: COLORS.black,
-    height:200,
+    height: 200,
+    width: 400,
   },
   profileContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
+    alignItems: "center",
     padding: 10,
   },
   textProfile: {
@@ -80,7 +84,7 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 55,
     marginLeft: 20,
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonContainer: {
     margin: 10,
@@ -96,52 +100,57 @@ export const globalStyles = StyleSheet.create({
   buttonText: {
     color: COLORS.white,
     fontWeight: "bold",
-    fontSize: 15, 
+    fontSize: 15,
   },
 
-//   HomeScreen
+  //   HomeScreen & ForgotScreen - container
 
-homeContainer: {
+  homeContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
-    textAlign: "left",
   },
-headerText: {
+  headerText: {
     fontWeight: "bold",
     fontSize: 20,
-    marginBottom: 15,
+    marginVertical: 15,
   },
-  background:{
-    height: 150,
-    width: "82%",
-    marginLeft: 50,
-    marginBottom: 20,
-    resizeMode: "cover",
+  imagesView: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  leftLogo: {
+    height: 95,
+    width: 73,
+    marginRight: 15,
+    marginHorizontal: 30,
+  },
+  rightLogo: {
+    height: 95,
+    width: 95,
+    marginLeft: 15,
   },
   btnContainer: {
     margin: 10,
-    height: 45,
+    height: 60,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 10,
     width: "85%",
     borderRadius: 10,
-    backgroundColor: COLORS.orange,
+    backgroundColor: COLORS.primary,
   },
   btnText: {
-    color: COLORS.white,
     fontWeight: "bold",
-    fontSize: 18, 
+    fontSize: 14,
   },
-
-// ForgotScreen
-
-
-
-})
-
+  Title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    paddingTop: 50,
+  },
+});
 
 export default globalStyles;

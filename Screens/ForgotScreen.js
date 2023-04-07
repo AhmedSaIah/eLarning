@@ -1,14 +1,12 @@
-import { StatusBar } from "expo-status-bar";
 import { React, useState } from "react";
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, View } from "react-native";
 import { resetPassword } from "../Firebase/auth";
-import {globalStyles} from "../styles/style";
+import { globalStyles } from "../styles/style";
 import COLORS from "../assets/COLORS";
+import GButton from "../Components/GButton";
+import GInput from "../Components/GInput";
+import { Title } from "react-native-paper";
+
 
 export default function ForgotScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -18,32 +16,31 @@ export default function ForgotScreen({ navigation }) {
     resetPassword(email)
       .then(() => {
         // setSent(true);
-        alert("An email has been sent to reset your password");
+        Alert.alert("An email has been sent to reset your password");
         navigation.navigate("Login");
       })
       .catch((e) => {
-        alert("Error", e.message);
+        Alert.alert("Error", e.message);
       });
-  };
+  }
 
   return (
     <View style={globalStyles.container}>
-      <View>
-        <Text style={globalStyles.headerText}>Find your account</Text>
-      </View>
-      <View style={globalStyles.inputView}>
-        <TextInput
-          style={globalStyles.TextInput}
-          placeholder="Email"
-          placeholderTextColor={COLORS.black}
-          cursorColor={COLORS.black}
-          onChangeText={(email) => setEmail(email)}
-        />
-      </View>
-      <TouchableOpacity style={globalStyles.btnContainer} onPress={() => forgetPassword()}>
-        <Text style={globalStyles.textStyle}>Reset password</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
+      <Title>Find Your Account</Title>
+      <GInput
+        modeValue={"outlined"}
+        labelName={"Email"}
+        onChangeText={setEmail}
+        value={email}
+      />
+      <GButton
+        mode="contained"
+        labelStyle={globalStyles.btnText}
+        title={"Reset Password"}
+        buttonColor={COLORS.primary}
+        textColor={COLORS.white}
+        onPress={() => forgetPassword()}
+      />
     </View>
   );
 }
