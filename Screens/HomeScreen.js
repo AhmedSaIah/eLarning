@@ -19,9 +19,9 @@ export default function HomeScreen({ navigation }) {
         <TouchableOpacity style={globalStyles.btnContainer} onPress={() => navigation.navigate("Register")}> 
           <Text style={globalStyles.btnText}>Register</Text>
         </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
         <Text style={globalStyles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <StatusBar style="auto" />
     </View>
   );
