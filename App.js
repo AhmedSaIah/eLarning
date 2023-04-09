@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "expo-status-bar";
 import { React } from "react";
 import { View } from "react-native";
 import LoginScreen from "./Screens/LoginScreen";
@@ -21,7 +20,6 @@ export default function App({}) {
         <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
       <View>
-        <StatusBar style="auto" />
       </View>
     </NavigationContainer>
   );
