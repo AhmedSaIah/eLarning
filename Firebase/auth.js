@@ -5,7 +5,8 @@ import {
   getAuth,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  signInWithPopup,x
+  signInWithPopup,
+  // GoogleAuthProvider,
 } from "firebase/auth";
 
 export const auth = getAuth(app);
@@ -55,9 +56,22 @@ async function resetPassword(email) {
   await sendPasswordResetEmail(auth, email);
 }
 
-async function singinWithSocial(provider) {
+async function signinWithSocial(provider) {
   await signInWithPopup(auth, provider);
 }
+
+// async function singinWithGoogle(provider) {
+//   await signInWithPopup(auth, provider).then((result) => {
+//     const credential = GoogleAuthProvider.credentialFromResult(result);
+//     const token = credential.accessToken;
+//     const user = result.user;
+//   }).catch((error) => {
+//     const errorMessage = error.message;
+//     const email = error.customData.email;
+//     const credential = GoogleAuthProvider.credentialFromError(error);
+//     console.log("Error signing in with google account", email, " : ", errorMessage);
+//   })
+// }
 
 async function logout() {
   auth
@@ -74,6 +88,6 @@ export {
   getUserUId,
   logout,
   getUserToken,
-  singinWithSocial,
+  signinWithSocial,
   onAuthStateChanged,
 };
