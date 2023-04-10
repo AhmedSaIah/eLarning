@@ -1,5 +1,5 @@
 import { React } from "react";
-import { ImageBackground, Text, View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { Title, Subheading } from "react-native-paper";
 import { globalStyles } from "../styles/style";
 import GButton from "../Components/GButton";
