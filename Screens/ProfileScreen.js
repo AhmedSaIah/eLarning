@@ -9,7 +9,7 @@ import COLORS from "../assets/COLORS";
 export default function ProfileScreen({ navigation }) {
   async function signOut() {
     await logout();
-    navigation.navigate("Home");
+    navigation.navigate("Intro");
   }
 
   return (

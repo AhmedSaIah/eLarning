@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
       <View style={globalStyles.imagesView}>
       <ImageBackground
         style={globalStyles.leftLogo}
-        source={require("../assets/Icon.png")}
+        source={require("../assets/icon.png")}
       />
       <ImageBackground
         style={globalStyles.rightLogo}
