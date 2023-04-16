@@ -5,17 +5,10 @@ import {
   getAuth,
   sendPasswordResetEmail,
   onAuthStateChanged,
-  signInWithPopup,
-  GoogleAuthProvider
+  signInWithPopup,x
 } from "firebase/auth";
 
 export const auth = getAuth(app);
-
-export const googleProvider = new GoogleAuthProvider();
-googleProvider.addScope("https://www.googleapis.com/auth/contacts.readonly");
-googleProvider.setCustomParameters({
-  login_hint: "user@example.com",
-});
 
 // onAuthStateChanged(auth, (user) => {
 //     if ( user ) {
@@ -29,7 +22,7 @@ googleProvider.setCustomParameters({
 
 async function isSignedIn() {
   console.log("from isSignedIn method: ", auth.currentUser);
-  return (auth.currentUser) != null;
+  return (await auth.currentUser) != null;
 }
 
 async function getUserUId() {
