@@ -1,37 +1,37 @@
 import { React, useState } from "react";
-import {
-  View,
-  Image,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-} from "react-native";
-import { Headline, Subheading, Paragraph } from "react-native-paper";
+import { View, Image, StyleSheet, Text, ActivityIndicator } from "react-native";
+import { Headline, Subheading, Paragraph, Alert } from "react-native-paper";
 import GButton from "../Components/GButton";
 import COLORS from "../assets/COLORS";
 import globalStyles from "../styles/style";
+import { GoogleAuthProvider } from "firebase/auth";
+import { googleProvider } from "../Firebase/firebase-config";
+import { singinWithSocial } from "../Firebase/auth";
 
 export default function IntroScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
-  // const googleProvider = new GoogleAuthProvider();
-  // const facebookProvider = new FacebookAuthProvider();
 
-  // function continuesWithGoogle (){
-  //   setLoading(true);
-  //   singinWithSocial(googleProvider).then((result) => {
-  //     const credential = GoogleAuthProvider.credentialFromResult(result);
-  //     const token = credential.accessToken;
-  //     const user = result.user;
-  //     setLoading(false);
-  //     goToHome();
-  //   }).catch((error) => {
-  //     setLoading(false);
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     const email = error.email;
-  //     const credential = GoogleAuthProvider.credentialFromError(error);
-  // });
-  // }
+  const onGooglePress = () => {
+    setLoading(true);
+    singinWithSocial(googleProvider)
+      .then((resuult) => {
+        const credential = GoogleAuthProvider.credentialFromResult(resuult);
+        const token = credential.accessToken;
+        const user = resuult.user;
+        setLoading(false);
+        navigation.navigate("Profile");
+      })
+      .catch((e) => {
+        setLoading(false);
+        const eCode = e.code;
+        const eMessage = e.message;
+        const email = e.auth.email;
+        const credential = GoogleAuthProvider.credentialFromError(e);
+        Alert.alert(eMessage);
+      });
+  };
+
+  // const facebookProvider = new FacebookAuthProvider();
 
   // function continuesWithFacebook (){
   //   singinWithSocial(facebookProvider).then((result) => {
@@ -84,7 +84,9 @@ export default function IntroScreen({ navigation }) {
         title={"Sign In with Google"}
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
-        onPress={() => {}}
+        onPress={() => {
+          onGooglePress;
+        }}
       />
 
       <GButton
