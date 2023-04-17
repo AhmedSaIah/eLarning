@@ -1,11 +1,11 @@
 import { React, useState } from "react";
 import { View, Image, StyleSheet, Text, ActivityIndicator } from "react-native";
-import { Headline, Subheading, Paragraph, Alert } from "react-native-paper";
+import { Headline, Subheading, Paragraph } from "react-native-paper";
 import GButton from "../Components/GButton";
 import COLORS from "../assets/COLORS";
 import globalStyles from "../styles/style";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { googleProvider } from "../Firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { googleProvider, facebookProvider } from "../Firebase/auth";
 import { auth } from "../Firebase/firebase-config";
 
 export default function IntroScreen({ navigation }) {
@@ -30,6 +30,26 @@ export default function IntroScreen({ navigation }) {
         const credential = GoogleAuthProvider.credentialFromError(e);
       });
   };
+
+  async function onFacebookPress(){
+    setLoading(true);
+    await signInWithPopup(auth, facebookProvider)
+      .then((resuult) => {
+        const credential = FacebookAuthProvider.credentialFromResult(resuult);
+        const token = credential.accessToken;
+        const secret = credential.secret;
+        const user = resuult.user;
+        setLoading(false);
+        navigation.navigate("Profile");
+      })
+      .catch((e) => {
+        setLoading(false);
+        const eCode = e.code;
+        const eMessage = e.message;
+        const email = e.auth.email;
+        const credential = FacebookAuthProvider.credentialFromError(e);
+      });
+  }
 
   // const facebookProvider = new FacebookAuthProvider();
 
@@ -74,7 +94,9 @@ export default function IntroScreen({ navigation }) {
         title={"Sign In with Facebbok"}
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
-        onPress={() => {}}
+        onPress={() => {
+          onFacebookPress();
+        }}
       />
 
       <GButton
