@@ -14,6 +14,8 @@ import { Title, Subheading, TextInput } from "react-native-paper";
 import GButton from "../Components/GButton";
 import GInput from "../Components/GInput";
 import globalStyles from "../styles/style";
+import { auth, db } from "../Firebase/firebase-config";
+
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -30,6 +32,7 @@ export default function LoginScreen({ navigation }) {
     login(email, password)
       .then(() => {
         navigation.navigate("Profile");
+        console.log(auth.currentUser.uid);
       })
       .catch((e) => {
         Alert.alert("Something went wrong", e.message);
