@@ -1,35 +1,73 @@
 import { React } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image , SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
 import { auth } from "../Firebase/firebase-config";
 import { logout } from "../Firebase/auth";
 import { globalStyles } from "../styles/style";
 import GButton from "../Components/GButton";
 import COLORS from "../assets/COLORS";
-
-export default function ProfileScreen({ navigation }) {
+import { Caption, Title } from "react-native-paper";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+export default function ProfileScreen({ navigation , route}) {
   async function signOut() {
     await logout();
     navigation.navigate("Intro");
   }
 
   return (
-    <View style={globalStyles.profileContainer}>
-      <View style={globalStyles.header}></View>
+    <SafeAreaView style={globalStyles.profileContainer}>
+      <View style={globalStyles.header}>
+        <View>
       <Image
         style={globalStyles.avatar}
         source={{
           uri: "https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png",
         }}
+        size={80}
       />
-      <Text style={globalStyles.textProfile}>{auth.currentUser.email}</Text>
-      <GButton
+      </View>
+      
+      </View>
+      <Text style={globalStyles.Title}>Aya Mohamed</Text>
+      {/* <Text>{route.params ? route.params.userId : user.uid}</Text> */}
+      <Caption style={globalStyles.caption}>Computer Sci</Caption>
+      <View style={globalStyles.userBtnWrapper}>
+        <TouchableOpacity style={globalStyles.userBtn} 
+         onPress={() => {navigation.navigate("EditProfile");
+        }}>
+          <Text style={globalStyles.userBtnTxt}>Edit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={globalStyles.userBtn} onPress={() => signOut()}>
+          <Text style={globalStyles.userBtnTxt}>Logout</Text>
+        </TouchableOpacity>
+      </View>
+      {/* <Text style={globalStyles.textProfile}>{auth.currentUser.email}</Text> */}
+      {/* <Text style={globalStyles.textProfile}>{auth.currentUser.phoneNumber}</Text> */}
+     <View style={globalStyles.userInfoSection}>
+        <View style={globalStyles.row}>
+          <Icon name="map-marker-radius" color="#777777" size={30}/>
+          <Title style={{color:"#777777" , marginLeft:10}}>Cairo-Egypt</Title>
+        </View>
+        <View style={globalStyles.row}>
+          <Icon name="phone" color="#777777" size={30}/>
+          <Title style={{color:"#777777" , marginLeft:10}}>0121654315</Title>
+        </View>
+        <View style={globalStyles.row}>
+          <Icon name="email" color="#777777" size={30}/>
+          <Title style={{color:"#777777" , marginLeft:10}}>ayam@gmail.com</Title>
+        </View>
+        <View style={globalStyles.row}>
+          <Icon name="birthdate" color="#777777" size={30}/>
+          <Title style={{color:"#777777" , marginLeft:10}}>21-2-2001</Title>
+        </View>
+     </View>
+      {/* <GButton
         mode="contained"
         labelStyle={globalStyles.btnText}
         title={"SignOut"}
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
         onPress={() => signOut()}
-      />
-    </View>
+      /> */}
+    </SafeAreaView>
   );
 }

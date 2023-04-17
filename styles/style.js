@@ -102,7 +102,23 @@ export const globalStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
   },
-
+  userBtnWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    marginBottom: 10,
+  },
+userBtn: {
+    borderColor: '#2e64e5',
+    borderWidth: 2,
+    borderRadius: 3,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginHorizontal: 5,
+  },
+  userBtnTxt: {
+    color: '#2e64e5',
+  },
   //   HomeScreen & ForgotScreen - container
 
   homeContainer: {
@@ -147,9 +163,47 @@ export const globalStyles = StyleSheet.create({
     fontSize: 14,
   },
   Title: {
+    marginTop:10,
     fontSize: 24,
     fontWeight: "bold",
     paddingTop: 50,
+  },
+  userInfoSection: {
+    paddingHorizontal: 30,
+    marginBottom: 25,
+    alignItems:'flex-start'
+   
+  },
+  caption: {
+    fontSize: 14,
+    // lineHeight: 14,
+    fontWeight: '500',
+  },
+  row: {
+    flexDirection: 'row',
+    // marginBottom: 10,
+    alignItems:"flex-start",
+  },
+   infoBoxWrapper: {
+    borderBottomColor: '#dddddd',
+    borderBottomWidth: 1,
+    borderTopColor: '#dddddd',
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    height: 100,
+  },
+  infoBox: {
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  //EditProfileScreen
+  Editcontainer: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
