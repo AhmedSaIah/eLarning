@@ -98,7 +98,7 @@ export default function LoginScreen({ navigation }) {
 
         <Text style={styles.Text}>OR</Text>
 
-        <GButton
+        {/* <GButton
           mode="outlined"
           icon={"facebook"}
           labelStyle={globalStyles.btnText}
@@ -114,7 +114,7 @@ export default function LoginScreen({ navigation }) {
           title={"Login With Google"}
           buttonColor={COLORS.white}
           textColor={COLORS.darkOrange}
-        />
+        /> */}
 
         <View
           style={{
