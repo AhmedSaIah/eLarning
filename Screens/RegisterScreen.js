@@ -17,6 +17,7 @@ export default function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  // const phonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
   // const minNumberofChars = 6;
   // const maxNumberofChars = 16;
   // const namePattern = /^[a-zA-Z ]{2,30}$/;
@@ -34,9 +35,9 @@ export default function RegisterScreen({ navigation }) {
     else if (password !== confirmPassword) {
       alert("Passwords doesn't match");
     }
-    // else if (!namePattern.test(displayName)) {
-    //   alert("Invalid display name!");
-    // }
+    else if (!namePattern.test(FirstName) || !namePattern.test(SecondName)) {
+      alert("Invalid characters used in name");
+    }
     else {
       register(email, password).then(() => {
         navigation.navigate("Login");
