@@ -17,6 +17,7 @@ import globalStyles from "../styles/style";
 import { auth, db } from "../Firebase/firebase-config";
 
 
+
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

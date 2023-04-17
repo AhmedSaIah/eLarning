@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, Dimensions} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import { StyleSheet, Dimensions } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
-export default function GInput({labelName,modeValue, ...rest}) {
+export default function GInput({ labelName, modeValue, ...rest }) {
   return (
     <TextInput
       mode={modeValue}
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 10,
     marginBottom: 10,
-    width: width *0.85,
+    width: width * 0.85,
     height: height / 17,
   },
 });

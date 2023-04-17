@@ -74,7 +74,7 @@ export default function ProfileScreen({ navigation , route}) {
         </View>
         <View style={globalStyles.row}>
           <Icon name="phone" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>0121654315</Title>
+          <Title style={{color:"#777777" , marginLeft:10}}>{auth.currentUser.email}</Title>
         </View>
         <View style={globalStyles.row}>
           <Icon name="email" color="#777777" size={30}/>
