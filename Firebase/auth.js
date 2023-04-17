@@ -62,7 +62,7 @@ async function resetPassword(email) {
   await sendPasswordResetEmail(auth, email);
 }
 
-async function singinWithSocial(provider) {
+async function signinWithSocial(provider) {
   await signInWithPopup(auth, provider);
 }
 
@@ -81,6 +81,6 @@ export {
   getUserUId,
   logout,
   getUserToken,
-  singinWithSocial,
+  signinWithSocial,
   onAuthStateChanged,
 };

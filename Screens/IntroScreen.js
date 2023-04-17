@@ -4,19 +4,20 @@ import { Headline, Subheading, Paragraph, Alert } from "react-native-paper";
 import GButton from "../Components/GButton";
 import COLORS from "../assets/COLORS";
 import globalStyles from "../styles/style";
-import { GoogleAuthProvider } from "firebase/auth";
-import { googleProvider } from "../Firebase/firebase-config";
-import { singinWithSocial } from "../Firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { googleProvider } from "../Firebase/auth";
+import { auth } from "../Firebase/firebase-config";
 
 export default function IntroScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
 
-  const onGooglePress = () => {
+  async function onGooglePress(){
     setLoading(true);
-    singinWithSocial(googleProvider)
+    await signInWithPopup(auth, googleProvider)
       .then((resuult) => {
         const credential = GoogleAuthProvider.credentialFromResult(resuult);
         const token = credential.accessToken;
+        const secret = credential.secret;
         const user = resuult.user;
         setLoading(false);
         navigation.navigate("Profile");
@@ -27,7 +28,6 @@ export default function IntroScreen({ navigation }) {
         const eMessage = e.message;
         const email = e.auth.email;
         const credential = GoogleAuthProvider.credentialFromError(e);
-        Alert.alert(eMessage);
       });
   };
 
@@ -85,7 +85,7 @@ export default function IntroScreen({ navigation }) {
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
         onPress={() => {
-          onGooglePress;
+          onGooglePress();
         }}
       />
 
