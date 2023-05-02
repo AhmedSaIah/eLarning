@@ -7,6 +7,10 @@ import { COLORS } from "../assets/COLORS";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Title } from 'react-native-paper';
 export default function EditProfileScreen() {
+
+  const handleUpdate = ()=>{
+    
+  }
   return (
    <View style={globalStyles.Editcontainer}>
 
@@ -85,7 +89,7 @@ export default function EditProfileScreen() {
         labelStyle={globalStyles.btnText}
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
-         onPress={() => alert('Profile Updated')}/>
+         onPress={handleUpdate}/>
    </View>
    
   )
