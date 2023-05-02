@@ -6,11 +6,8 @@ import GButton from "../Components/GButton";
 import { COLORS } from "../assets/COLORS";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Title } from 'react-native-paper';
-export default function EditProfileScreen() {
 
-  const handleUpdate = ()=>{
-    
-  }
+export default function EditProfileScreen() {
   return (
    <View style={globalStyles.Editcontainer}>
 
@@ -66,10 +63,6 @@ export default function EditProfileScreen() {
       />
         </View>
         <View style={globalStyles.row}>
-    <GInput
-        modeValue={"outlined"}
-        labelName={"Email"}
-      />
         </View>
         <View style={globalStyles.row}>
     <GInput
@@ -89,7 +82,7 @@ export default function EditProfileScreen() {
         labelStyle={globalStyles.btnText}
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
-         onPress={handleUpdate}/>
+         onPress={() => alert('Profile Updated')}/>
    </View>
    
   )
