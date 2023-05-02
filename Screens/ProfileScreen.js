@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React , useState} from "react";
 import { View, Text, Image , SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
 import { auth, db } from "../Firebase/firebase-config";
 import { logout } from "../Firebase/auth";
@@ -8,8 +8,6 @@ import COLORS from "../assets/COLORS";
 import { Caption, Title } from "react-native-paper";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { doc, getDoc } from "firebase/firestore";
-
-
 
 
 export default function ProfileScreen({ navigation , route}) {
@@ -74,11 +72,11 @@ export default function ProfileScreen({ navigation , route}) {
         </View>
         <View style={globalStyles.row}>
           <Icon name="phone" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>0121654315</Title>
+          <Title style={{color:"#777777" , marginLeft:10}}>01278263483</Title>
         </View>
         <View style={globalStyles.row}>
           <Icon name="email" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>ayam@gmail.com</Title>
+          <Title style={{color:"#777777" , marginLeft:10}}>{auth.currentUser.email}</Title>
         </View>
         <View style={globalStyles.row}>
           <Icon name="birthdate" color="#777777" size={30}/>

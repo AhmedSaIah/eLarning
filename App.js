@@ -10,6 +10,7 @@ import ForgotScreen from "./Screens/ForgotScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import IntroScreen from "./Screens/IntroScreen";
 import OnboardingScreen from "./Screens/OnBoardingScreen";
+import EditProfileScreen from "./Screens/EditProfileScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App({}) {
@@ -23,7 +24,7 @@ export default function App({}) {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Forgot" component={ForgotScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
-        {/* <Stack.Screen name="EditProfile" component={EditProfile} /> */}
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
 
       </Stack.Navigator>
       <View>

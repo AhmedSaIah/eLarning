@@ -7,6 +7,7 @@ import GInput from "../Components/GInput";
 import GButton from "../Components/GButton";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../Firebase/firebase-config";
+
 export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [FirstName, setFirstName] = useState("");
