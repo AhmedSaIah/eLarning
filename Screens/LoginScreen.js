@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }) {
     login(email, password)
       .then(() => {
         navigation.navigate("Profile");
-        console.log(auth.currentUser.uid);
+        // console.log(auth.currentUser.uid);
       })
       .catch((e) => {
         Alert.alert("Something went wrong", e.message);

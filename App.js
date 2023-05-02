@@ -23,6 +23,8 @@ export default function App({}) {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Forgot" component={ForgotScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        {/* <Stack.Screen name="EditProfile" component={EditProfile} /> */}
+
       </Stack.Navigator>
       <View>
         <StatusBar style="auto" />

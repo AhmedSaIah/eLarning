@@ -13,7 +13,8 @@ export default function RegisterScreen({ navigation }) {
   const [SecondName, setSecondName] = useState("");
   const [Birthdate, setBirthdate] = useState("");
   const [Phone, setPhone] = useState("");
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -21,10 +22,13 @@ export default function RegisterScreen({ navigation }) {
   // const minNumberofChars = 6;
   // const maxNumberofChars = 16;
   // const namePattern = /^[a-zA-Z ]{2,30}$/;
+  const phonePattern = /^01[0-2]{1}[0-9]{8}$/;;
+  const BirthdatePattern = /^((0[1-9])|(1[0-2]))\/((0[1-9])|([1-2][0-9])|(3[0-1]))\/\d{4}$/;
+
 
   function registerUser() {
-    if (email === "" || password === "") {
-      alert("Email or password or username is empty");
+    if (email === "" || password === ""||Phone === "") {
+      alert("Email or password or Phone is empty");
     } else if (!emailPattern.test(email)) {
       alert("Please use a real email");
     }
@@ -35,16 +39,43 @@ export default function RegisterScreen({ navigation }) {
     else if (password !== confirmPassword) {
       alert("Passwords doesn't match");
     }
-    else if (!namePattern.test(FirstName) || !namePattern.test(SecondName)) {
-      alert("Invalid characters used in name");
+    else if (!phonePattern.test(Phone)) {
+      alert("Invalid phone number format");
     }
+    else if (!BirthdatePattern.test(Birthdate)) {
+      alert("Invalid Birthdate format");
+    }
+    // else if (!namePattern.test(displayName)) {
+    //   alert("Invalid display name!");
+    // }
     else {
-      register(email, password).then(() => {
+      register(email, password,Phone).then(() => {
+        addUserToDatabase();
         navigation.navigate("Login");
       });
-      addUserToDatabase();
+      
     }
   }
+
+  const handlePhoneNumChange=(value)=>{
+    setPhone(value);
+    setErrorMessage('');
+  };
+  // const handleSubmit=()=>{
+  //   if(phonePattern.test(Phone)){
+  //     db.collection('phoneNumbers').add({
+  //       phoneNumber: Phone,
+  //       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  //     }).then(() => {
+  //       console.log('valid number')
+  //     }).catch((error) => {
+  //       console.error('Error adding phone number: ', error);
+  //     });
+  //   }else{
+  //     setErrorMessage('Invalid phone number format');
+  //   }
+  // };
+
   const addUserToDatabase =async()=>{
     await setDoc(doc(db, "users", auth.currentUser.uid), {
       FirstName: FirstName,
@@ -71,16 +102,18 @@ export default function RegisterScreen({ navigation }) {
       />
       <GInput
         modeValue={"outlined"}
-        labelName={"Birthdate"}
+        labelName={"MM/DD/YYYY"}
         onChangeText={setBirthdate}
         value={Birthdate}
       />
       <GInput
         modeValue={"outlined"}
-        labelName={"phone"}
-        onChangeText={setPhone}
+        labelName={"Phone"}
+        KeyboardType="phone=pad"
+        onChangeText={handlePhoneNumChange}
         value={Phone}
       />
+      {errorMessage ?<Text style={styles.error}>{errorMessage}</Text>:null}
       <GInput
         modeValue={"outlined"}
         labelName={"Email"}
