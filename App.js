@@ -24,7 +24,7 @@ export default function App({}) {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Forgot" component={ForgotScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen}  options={{headerShown: false}}/>
 
       </Stack.Navigator>
       <View>
