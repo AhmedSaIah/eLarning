@@ -10,13 +10,12 @@ import { Title } from "react-native-paper";
 
 export default function ForgotScreen({ navigation }) {
   const [email, setEmail] = useState("");
-  // const [sent, setSent] = useState(false);
 
   function forgetPassword() {
     resetPassword(email)
       .then(() => {
         // setSent(true);
-        Alert.alert("An email has been sent to reset your password");
+        alert("An email has been sent to reset your password");
         navigation.navigate("Login");
       })
       .catch((e) => {

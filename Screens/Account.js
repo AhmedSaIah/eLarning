@@ -10,12 +10,10 @@ import GButton from "../Components/GButton";
 import COLORS from "../assets/COLORS";
 
 
-export default function Account({ navigation , route}) {
+export default function Account({ navigation }) {
   const [email, setEmail] = useState("");
   const [FirstName, setFirstName] = useState("");
   const [SecondName, setSecondName] = useState("");
-  const [Birthdate, setBirthdate] = useState("");
-  const [Phone, setPhone] = useState("");
 
   const getUser=async()=>{
     const docRef = doc(db, "users", auth.currentUser.uid);
@@ -26,8 +24,6 @@ export default function Account({ navigation , route}) {
       const data = docSnap.data();
       setFirstName(data.FirstName);
       setSecondName(data.SecondName);
-      setBirthdate(data.Birthdate);
-      setPhone(data.Phone);
       setEmail(data.email);
     } else {
   // docSnap.data() will be undefined in this case
@@ -53,7 +49,7 @@ export default function Account({ navigation , route}) {
       </View>
       
       </View>
-      <Text style={globalStyles.Title}>{FirstName}{SecondName}</Text>
+      <Text style={globalStyles.Title}>{FirstName+" "}{SecondName}</Text>
       {/* <Text>{route.params ? route.params.userId : user.uid}</Text> */}
       <View style={globalStyles.userBtnWrapper}>
         {/* <TouchableOpacity style={globalStyles.userBtn} 
@@ -87,7 +83,7 @@ export default function Account({ navigation , route}) {
      <View style={globalStyles.userInfoSection}>
         <View style={globalStyles.row}>
           <Icon name="map-marker-radius" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>Cairo-Egypt</Title>
+          <Title style={{color:"#777777" , marginLeft:10}}>Egypt</Title>
         </View>
         <View style={globalStyles.row}>
           <Icon name="email" color="#777777" size={30}/>
