@@ -103,8 +103,9 @@ export const globalStyles = StyleSheet.create({
     fontSize: 15,
   },
   userBtnWrapper: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
     width: '100%',
     marginBottom: 10,
   },
