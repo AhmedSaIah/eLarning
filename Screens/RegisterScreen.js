@@ -1,146 +1,202 @@
-import { React, useState } from "react";
-import { View } from "react-native";
-import { register } from "../Firebase/auth";
-import { COLORS } from "../assets/COLORS";
-import { globalStyles } from "../styles/style";
-import GInput from "../Components/GInput";
-import GButton from "../Components/GButton";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../Firebase/firebase-config";
+import React, {useState} from 'react';
+import { View,ScrollView,StyleSheet,TouchableOpacity,ActivityIndicator, Alert} from 'react-native';
+import {Title, Subheading,TextInput,Text} from 'react-native-paper';
+import {register, getUserUId, login} from "../Firebase/auth";
+import {addUser} from "../Firebase/user";
 
-export default function RegisterScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [FirstName, setFirstName] = useState("");
-  const [SecondName, setSecondName] = useState("");
-  const [Birthdate, setBirthdate] = useState("");
-  const [Phone, setPhone] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState('');
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  // const phonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-  // const minNumberofChars = 6;
-  // const maxNumberofChars = 16;
-  // const namePattern = /^[a-zA-Z ]{2,30}$/;
-  const phonePattern = /^01[0-2]{1}[0-9]{8}$/;;
-  const BirthdatePattern = /^((0[1-9])|(1[0-2]))\/((0[1-9])|([1-2][0-9])|(3[0-1]))\/\d{4}$/;
+import GButton from '../Components/GButton';
+import GInput from '../Components/GInput';
+import COLORS from '../assets/COLORS';
 
+export default function CreateAccount({navigation})  {
 
-  function registerUser() {
-    if (email === "" || password === ""||Phone === "") {
-      alert("Email or password or Phone is empty");
-    } else if (!emailPattern.test(email)) {
-      alert("Please use a real email");
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLasttName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    
+    const [loading, setLoading] = useState(false);
+    const [color1, setColor1] = useState(COLORS.secondary);
+    const [color2, setColor2] = useState(COLORS.secondary);
+    const [secureText1, setSecureText1] = useState(true);
+    const [secureText2, setSecureText2] = useState(true);
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const minNumberofChars = 6;
+    const maxNumberofChars = 16;
+    const namePattern = /^[a-zA-Z ]{2,30}$/;
+
+    function registerUser() {
+      if (email === "" || password === "") {
+        alert("Email or password is empty");
+      } else if (!emailPattern.test(email)) {
+        alert("Please use a real email");
+      }
+      // else if (password < minNumberofChars || password > maxNumberofChars) {
+      //   // Something is wrong in this case
+      //   alert("Can not use this password");
+      // }
+      else if (password !== confirmPassword) {
+        alert("Passwords doesn't match");
+      }
+      // else if (!namePattern.test(displayName)) {
+      //   alert("Invalid display name!");
+      // }
+      else {
+        register(email, password).then(() => {
+          getUserUId().then((id) => {
+            addUser({id: id, email, firstName,lastName, userImage :'https://i.ibb.co/sQzK2YR/Avatar-03.png'});
+        });
+        login(email,password);
+        navigation.navigate('Courses');
+        });
+      }
     }
-    // else if (password < minNumberofChars || password > maxNumberofChars) {
-    //   // Something is wrong in this case
-    //   alert("Can not use this password");
-    // }
-    else if (password !== confirmPassword) {
-      alert("Passwords doesn't match");
+
+    function onPress1(){
+        setColor1(COLORS.primary);
+        setSecureText1(false);
     }
-    else if (!phonePattern.test(Phone)) {
-      alert("Invalid phone number format");
-    }
-    else if (!BirthdatePattern.test(Birthdate)) {
-      alert("Invalid Birthdate format");
-    }
-    // else if (!namePattern.test(displayName)) {
-    //   alert("Invalid display name!");
-    // }
-    else {
-      register(email, password,Phone).then(() => {
-        addUserToDatabase();
-        navigation.navigate("Login");
-      });
       
+    function onPress2(){
+        setColor2(COLORS.primary);
+        setSecureText2(false);
     }
-  }
 
-  const handlePhoneNumChange=(value)=>{
-    setPhone(value);
-    setErrorMessage('');
-  };
-  // const handleSubmit=()=>{
-  //   if(phonePattern.test(Phone)){
-  //     db.collection('phoneNumbers').add({
-  //       phoneNumber: Phone,
-  //       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-  //     }).then(() => {
-  //       console.log('valid number')
-  //     }).catch((error) => {
-  //       console.error('Error adding phone number: ', error);
-  //     });
-  //   }else{
-  //     setErrorMessage('Invalid phone number format');
-  //   }
-  // };
+    return(
+        <ScrollView style = {styles.container} >
+             {loading ? <ActivityIndicator size="large" color= {COLORS.primary} /> : null}
+            
+            
+            <View style = {styles.Viewstyle}>
+                <Title style = {styles.Title}>Welcome!</Title>
+                <Subheading>Take a moment to Create Account</Subheading>
+            </View>
 
-  const addUserToDatabase =async()=>{
-    await setDoc(doc(db, "users", auth.currentUser.uid), {
-      FirstName: FirstName,
-      SecondName: SecondName,
-      Phone:Phone,
-      Birthdate:Birthdate,
-      email: email
-    });
-  }
 
-  return (
-    <View style={globalStyles.container}>
-      <GInput
-        modeValue={"outlined"}
-        labelName={"First Name"}
-        onChangeText={setFirstName}
-        value={FirstName}
-      />
-      <GInput
-        modeValue={"outlined"}
-        labelName={"Second Name"}
-        onChangeText={setSecondName}
-        value={SecondName}
-      />
-      <GInput
-        modeValue={"outlined"}
-        labelName={"MM/DD/YYYY"}
-        onChangeText={setBirthdate}
-        value={Birthdate}
-      />
-      <GInput
-        modeValue={"outlined"}
-        labelName={"Phone"}
-        KeyboardType="phone=pad"
-        onChangeText={handlePhoneNumChange}
-        value={Phone}
-      />
-      {errorMessage ?<Text style={styles.error}>{errorMessage}</Text>:null}
-      <GInput
-        modeValue={"outlined"}
-        labelName={"Email"}
-        onChangeText={setEmail}
-        value={email}
-      />
-      <GInput
-        modeValue={"outlined"}
-        labelName={"Password"}
-        onChangeText={setPassword}
-        value={password}
-      />
-      <GInput
-        modeValue={"outlined"}
-        labelName={"Confirm Password"}
-        onChangeText={setConfirmPassword}
-        value={confirmPassword}
-      />
-      <GButton
-        mode="contained"
-        labelStyle={globalStyles.btnText}
-        title={"Register"}
-        buttonColor={COLORS.primary}
-        textColor={COLORS.white}
-        onPress={() => registerUser()}
-      />
-    </View>
-  );
+             <Title style = {styles.font}>Personal information</Title>
+            
+            <View style = {{alignItems: 'center'}}>
+
+                <GInput 
+                    modeValue={"outlined"}
+                    labelName={"First Name"}
+                    placeholder = "Enter your First Name"
+                    onChangeText={setFirstName}
+                    value={firstName}
+                />
+
+                <GInput 
+                    modeValue={"outlined"}
+                    labelName={"Last Name"}
+                    placeholder = "Enter your Last Name"
+                    onChangeText={setLasttName}
+                    value={lastName}  
+                />
+
+                <GInput 
+                    modeValue={"outlined"}
+                    labelName={"Email"}
+                    placeholder = "User@gmail.com"
+                    onChangeText={setEmail}
+                    value={email}  
+                />
+            </View>
+
+             <Title style = {styles.font}>Your Password</Title>
+
+            <View style = {{alignItems: 'center'}}>
+                
+                <Text>Password must be more than 6 character</Text>
+                <GInput 
+                    modeValue={"outlined"}
+                    labelName={"Password"}
+                    right = {<TextInput.Icon name = "eye" onPress = {onPress1} 
+                                        color = {color1} forceTextInputFocus = {false}/>}
+                    secureTextEntry={secureText1}
+                    onChangeText={setPassword}
+                    value={password}
+                />
+
+                <GInput 
+                    modeValue={"outlined"}
+                    labelName={"Confirm Password"}
+                    right = {<TextInput.Icon name = "eye" onPress = {onPress2} 
+                                            color = {color2} forceTextInputFocus = {false}/>}
+                    secureTextEntry={secureText2}
+                    onChangeText={setConfirmPassword}
+                    value={confirmPassword}        
+                />
+
+            </View>
+
+             <View
+                style={{
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
+                    justifyContent: 'center',
+                    marginTop: 40,
+                    marginBottom: 20,
+                }}>
+                <Text style={{color: COLORS.black, fontWeight: 'bold'}}>
+                    You have an account ?
+                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={{color: COLORS.primary, fontWeight: 'bold'}}>
+                    Sign-in
+                    </Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style = {{paddingBottom: 20,alignItems: 'center'}}>
+                <GButton
+                    mode = "contained"
+                    labelStyle={styles.ContinuesButtonLabel}
+                    title={"Create Account"}
+                    buttonColor = {COLORS.primary}
+                    onPress = {() => {registerUser()}}
+                />
+            </View>  
+        </ScrollView>
+        
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: COLORS.white,
+        flex: 1,
+      },
+
+      Viewstyle:{
+        paddingTop : 50,
+        paddingLeft : 20,
+      },
+
+      Title:{
+        fontSize : 30,
+        fontWeight: 'bold',
+    },
+
+    RadioButton : {
+        flexDirection: "row"
+    },
+
+    Text:{
+        padding : 5,
+        fontSize : 16,
+    },
+
+    ContinuesButtonLabel : {
+        fontSize: 14,
+    },
+
+    font:{
+        fontSize : 18,
+        fontWeight : 'bold',
+        color : COLORS.black,
+        paddingTop : 10,
+        paddingLeft : 20
+    }
+})

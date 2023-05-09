@@ -51,27 +51,6 @@ export default function IntroScreen({ navigation }) {
       });
   }
 
-  // const facebookProvider = new FacebookAuthProvider();
-
-  // function continuesWithFacebook (){
-  //   singinWithSocial(facebookProvider).then((result) => {
-  //     const user = result.user;
-  //     const credential = FacebookAuthProvider.credentialFromResult(result);
-  //     const accessToken = credential.accessToken;
-  //     setLoading(false);
-  //     goToHome();
-  //   })
-  //   .catch((error) => {
-  //     setLoading(false);
-  //     const errorCode = error.code;
-  //     const errorMessage = error.message;
-  //     const email = error.customData.email;
-  //     const credential = FacebookAuthProvider.credentialFromError(error);
-  //     console.log(error);
-
-  //   });
-  // }
-
   return (
     <View style={styles.container}>
       {loading ? (
@@ -116,7 +95,7 @@ export default function IntroScreen({ navigation }) {
         labelStyle={styles.ContinuesButtonLabel}
         title={"Create Account"}
         color={COLORS.primary}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("CreateAccount")}
       />
 
       <View
@@ -145,7 +124,7 @@ export default function IntroScreen({ navigation }) {
         />
       </View>
       <Paragraph style={styles.Paragraph}>
-        By Signing In or Creating Account. I agree to Keeper's Terms of
+        By Logging In or Creating Account. You agree to our Terms of
         Services, Privacy Policy
       </Paragraph>
     </View>
