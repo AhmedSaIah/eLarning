@@ -1,10 +1,8 @@
 import { React , useState} from "react";
-import { View, Text, Image , SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image , SafeAreaView, TouchableOpacity } from "react-native";
 import { auth, db } from "../Firebase/firebase-config";
 import { logout } from "../Firebase/auth";
 import { globalStyles } from "../styles/style";
-import GButton from "../Components/GButton";
-import COLORS from "../assets/COLORS";
 import { Caption, Title } from "react-native-paper";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { doc, getDoc } from "firebase/firestore";
@@ -13,7 +11,9 @@ import { doc, getDoc } from "firebase/firestore";
 export default function ProfileScreen({ navigation , route}) {
   const [email, setEmail] = useState("");
   const [FirstName, setFirstName] = useState("");
-
+  const [SecondName, setSecondName] = useState("");
+  const [Birthdate, setBirthdate] = useState("");
+  const [Phone, setPhone] = useState("");
 
   const getUser=async()=>{
     const docRef = doc(db, "users", auth.currentUser.uid);
@@ -23,13 +23,14 @@ export default function ProfileScreen({ navigation , route}) {
       console.log("Document data:", docSnap.data());
       const data = docSnap.data();
       setFirstName(data.FirstName);
+      setSecondName(data.SecondName);
+      setBirthdate(data.Birthdate);
+      setPhone(data.Phone);
       setEmail(data.email);
-
     } else {
   // docSnap.data() will be undefined in this case
     console.log("No such document!");
 }
-
   }
   async function signOut() {
     await logout();
@@ -50,7 +51,7 @@ export default function ProfileScreen({ navigation , route}) {
       </View>
       
       </View>
-      <Text style={globalStyles.Title}>Aya Mohamed</Text>
+      <Text style={globalStyles.Title}>{FirstName}{SecondName}</Text>
       {/* <Text>{route.params ? route.params.userId : user.uid}</Text> */}
       <Caption style={globalStyles.caption}>Computer Sci</Caption>
       <View style={globalStyles.userBtnWrapper}>
@@ -72,15 +73,15 @@ export default function ProfileScreen({ navigation , route}) {
         </View>
         <View style={globalStyles.row}>
           <Icon name="phone" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>01278263483</Title>
+          <Title style={{color:"#777777" , marginLeft:10}}>{Phone}</Title>
         </View>
         <View style={globalStyles.row}>
           <Icon name="email" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>{auth.currentUser.email}</Title>
+          <Title style={{color:"#777777" , marginLeft:10}}>{email}</Title>
         </View>
         <View style={globalStyles.row}>
-          <Icon name="birthdate" color="#777777" size={30}/>
-          <Title style={{color:"#777777" , marginLeft:10}}>21-2-2001</Title>
+          <Icon name="power" color="#777777" size={30}/>
+          <Title style={{color:"#777777" , marginLeft:10}}>{Birthdate}</Title>
         </View>
      </View>
       {/* <GButton

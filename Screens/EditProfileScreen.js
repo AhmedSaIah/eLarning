@@ -1,13 +1,54 @@
-import React from 'react'
-import { Button, View , Text, TouchableOpacity, ImageBackground} from 'react-native'
+import React, { useState } from 'react'
+import { View, TouchableOpacity, ImageBackground} from 'react-native'
 import { globalStyles } from "../styles/style";
 import GInput from "../Components/GInput";
 import GButton from "../Components/GButton";
 import { COLORS } from "../assets/COLORS";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Title } from 'react-native-paper';
+import { auth, db } from '../Firebase/firebase-config';
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 
-export default function EditProfileScreen() {
+export default function EditProfileScreen({navigation}) {
+  const [FirstName, setFirstName] = useState("");
+  const [SecondName, setSecondName] = useState("");
+  const [Birthdate, setBirthdate] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const getUser=async()=>{
+    const docRef = doc(db, "users", auth.currentUser.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      const data = docSnap.data();
+      setFirstName(data.FirstName);
+      setSecondName(data.SecondName);
+      setBirthdate(data.Birthdate);
+      setPhone(data.Phone);
+      setEmail(data.email);
+    } else {
+  // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+}
+  }
+
+  const handleUpdate = async()=>{
+    await updateDoc(doc(db, "users", auth.currentUser.uid), {
+      FirstName: FirstName,
+      SecondName: SecondName,
+      Birthdate: Birthdate,
+      Phone: Phone
+    });
+  } 
+  
+  const handleOnPress = async() => {
+    await handleUpdate();
+    await getUser();
+    navigation.navigate("Profile");
+  }
+
   return (
    <View style={globalStyles.Editcontainer}>
 
@@ -54,12 +95,15 @@ export default function EditProfileScreen() {
     <GInput
         modeValue={"outlined"}
         labelName={"First Name"}
+        onChangeText = {FirstName => setFirstName(FirstName)}
       />
         </View>
         <View style={globalStyles.row}>
     <GInput
         modeValue={"outlined"}
         labelName={"Last Name"}
+        onChangeText = {SecondName => setSecondName(SecondName)}
+
       />
         </View>
         <View style={globalStyles.row}>
@@ -68,6 +112,8 @@ export default function EditProfileScreen() {
     <GInput
         modeValue={"outlined"}
         labelName={"Phone Number"}
+        onChangeText = {Phone => setPhone(Phone)}
+
       />
         </View>
         <View style={globalStyles.row}>
@@ -75,6 +121,7 @@ export default function EditProfileScreen() {
         color={"#777777"}
         modeValue={"outlined"}
         labelName={"Birthdate"}
+        onChangeText = {Birthdate => setBirthdate(Birthdate)}
       />
         </View>
         <GButton title="Update"
@@ -82,7 +129,7 @@ export default function EditProfileScreen() {
         labelStyle={globalStyles.btnText}
         buttonColor={COLORS.primary}
         textColor={COLORS.white}
-         onPress={() => alert('Profile Updated')}/>
+         onPress={() => handleOnPress()}/>
    </View>
    
   )
