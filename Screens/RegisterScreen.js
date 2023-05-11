@@ -2,16 +2,18 @@ import React, {useState} from 'react';
 import { View,ScrollView,StyleSheet,TouchableOpacity,ActivityIndicator, Alert} from 'react-native';
 import {Title, Subheading,TextInput,Text} from 'react-native-paper';
 import {register, getUserUId, login} from "../Firebase/auth";
-import {addUser} from "../Firebase/user";
 
 import GButton from '../Components/GButton';
 import GInput from '../Components/GInput';
 import COLORS from '../assets/COLORS';
+import { db } from '../Firebase/firebase-config';
+import { setDoc, doc } from '@firebase/firestore';
+import { auth } from '../Firebase/firebase-config';
 
 export default function CreateAccount({navigation})  {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLasttName] = useState('');
+    const [FirstName, setFirstName] = useState('');
+    const [SecondName, setSecondName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,20 +35,20 @@ export default function CreateAccount({navigation})  {
       } else if (!emailPattern.test(email)) {
         alert("Please use a real email");
       }
-      // else if (password < minNumberofChars || password > maxNumberofChars) {
-      //   // Something is wrong in this case
-      //   alert("Can not use this password");
-      // }
+    //   else if (password < minNumberofChars || password > maxNumberofChars) {
+    //     // Something is wrong in this case
+    //     alert("Can not use this password");
+    //   }
       else if (password !== confirmPassword) {
         alert("Passwords doesn't match");
       }
-      // else if (!namePattern.test(displayName)) {
-      //   alert("Invalid display name!");
-      // }
+      else if (!namePattern.test(FirstName) || !namePattern.test(SecondName)) {
+        alert("Invalid display name!");
+      }
       else {
         register(email, password).then(() => {
           getUserUId().then((id) => {
-            addUser({id: id, email, firstName,lastName, userImage :'https://i.ibb.co/sQzK2YR/Avatar-03.png'});
+            addUserToDatabase();
         });
         login(email,password);
         navigation.navigate('Courses');
@@ -63,6 +65,14 @@ export default function CreateAccount({navigation})  {
         setColor2(COLORS.primary);
         setSecureText2(false);
     }
+
+    const addUserToDatabase =async()=>{
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+          FirstName: FirstName,
+          SecondName: SecondName,
+          email: email
+        });
+      }
 
     return(
         <ScrollView style = {styles.container} >
@@ -84,15 +94,15 @@ export default function CreateAccount({navigation})  {
                     labelName={"First Name"}
                     placeholder = "Enter your First Name"
                     onChangeText={setFirstName}
-                    value={firstName}
+                    value={FirstName}
                 />
 
                 <GInput 
                     modeValue={"outlined"}
                     labelName={"Last Name"}
                     placeholder = "Enter your Last Name"
-                    onChangeText={setLasttName}
-                    value={lastName}  
+                    onChangeText={setSecondName}
+                    value={SecondName}  
                 />
 
                 <GInput 

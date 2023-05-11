@@ -12,7 +12,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 export default function EditProfileScreen({ navigation }) {
   const [FirstName, setFirstName] = useState("");
   const [SecondName, setSecondName] = useState("");
-
+  
   const getUser = async () => {
     const docRef = doc(db, "users", auth.currentUser.uid);
     const docSnap = await getDoc(docRef);
@@ -37,7 +37,6 @@ export default function EditProfileScreen({ navigation }) {
 
   const handleOnPress = async () => {
     await handleUpdate();
-    await getUser();
     navigation.navigate("Account");
   };
 
