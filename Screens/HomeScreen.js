@@ -1,5 +1,5 @@
 import { React } from "react";
-import { ImageBackground, Text, View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import { Title, Subheading } from "react-native-paper";
 import { globalStyles } from "../styles/style";
 import GButton from "../Components/GButton";
@@ -9,17 +9,17 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={globalStyles.homeContainer}>
       <View style={globalStyles.imagesView}>
-      <ImageBackground
-        style={globalStyles.leftLogo}
-        source={require("../assets/icon.png")}
-      />
-      <ImageBackground
-        style={globalStyles.rightLogo}
-        source={require("../assets/restIcon.png")}
-      />
+        <ImageBackground
+          style={globalStyles.leftLogo}
+          source={require("../assets/icon.png")}
+        />
+        <ImageBackground
+          style={globalStyles.rightLogo}
+          source={require("../assets/restIcon.png")}
+        />
       </View>
-        <Title style={globalStyles.Title}>Keeper</Title>
-        <Subheading>Learning platform</Subheading>
+      <Title style={globalStyles.Title}>Keeper</Title>
+      <Subheading>Learning platform</Subheading>
       <GButton
         mode="contained"
         labelStyle={globalStyles.btnText}

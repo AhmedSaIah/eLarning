@@ -4,14 +4,18 @@ import { Headline, Subheading, Paragraph } from "react-native-paper";
 import GButton from "../Components/GButton";
 import COLORS from "../assets/COLORS";
 import globalStyles from "../styles/style";
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { googleProvider, facebookProvider } from "../Firebase/auth";
 import { auth } from "../Firebase/firebase-config";
 
 export default function IntroScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
 
-  async function onGooglePress(){
+  async function onGooglePress() {
     setLoading(true);
     await signInWithPopup(auth, googleProvider)
       .then((resuult) => {
@@ -29,9 +33,9 @@ export default function IntroScreen({ navigation }) {
         const email = e.auth.email;
         const credential = GoogleAuthProvider.credentialFromError(e);
       });
-  };
+  }
 
-  async function onFacebookPress(){
+  async function onFacebookPress() {
     setLoading(true);
     await signInWithPopup(auth, facebookProvider)
       .then((resuult) => {
@@ -124,8 +128,8 @@ export default function IntroScreen({ navigation }) {
         />
       </View>
       <Paragraph style={styles.Paragraph}>
-        By Logging In or Creating Account. You agree to our Terms of
-        Services, Privacy Policy
+        By Logging In or Creating Account. You agree to our Terms of Services,
+        Privacy Policy
       </Paragraph>
     </View>
   );

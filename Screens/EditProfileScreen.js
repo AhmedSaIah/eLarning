@@ -12,21 +12,6 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 export default function EditProfileScreen({ navigation }) {
   const [FirstName, setFirstName] = useState("");
   const [SecondName, setSecondName] = useState("");
-  
-  const getUser = async () => {
-    const docRef = doc(db, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      const data = docSnap.data();
-      setFirstName(data.FirstName);
-      setSecondName(data.SecondName);
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  };
 
   const handleUpdate = async () => {
     await updateDoc(doc(db, "users", auth.currentUser.uid), {
