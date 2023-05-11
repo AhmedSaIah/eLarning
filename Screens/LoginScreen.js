@@ -31,7 +31,7 @@ export default function Login({navigation})  {
     }
 
     function goToHome() {
-        navigation.navigate('Home');
+        navigation.navigate('Courses');
     }
 
     // function  goToInstructorHome(){

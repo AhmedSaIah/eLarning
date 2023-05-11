@@ -34,6 +34,7 @@ export default function Account({ navigation }) {
     await logout();
     navigation.navigate("Intro");
   }
+  
   getUser();
   return (
     <SafeAreaView style={globalStyles.profileContainer}>
@@ -42,7 +43,7 @@ export default function Account({ navigation }) {
       <Image
         style={globalStyles.avatar}
         source={{
-          uri: "https://www.booksie.com/files/profiles/22/mr-anonymous_230x230.png",
+          uri: 'https://bootdey.com/img/Content/avatar/avatar6.png',
         }}
         size={80}
       />

@@ -8,6 +8,7 @@ import Intro from '../Screens/IntroScreen';
 import CreateAccount from '../Screens/RegisterScreen';
 import Login from '../Screens/LoginScreen';
 import ForgotPassword from '../Screens/ForgotScreen';
+import Courses from "../Screens/Courses";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,8 @@ export default function AuthStack() {
               <Stack.Screen name='CreateAccount' component={CreateAccount}/>
               <Stack.Screen name='Login' component={Login}/>
               <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>
+              <Stack.Screen name='Courses' component={Courses} options ={{headerShown : false}}/> 
+
             </Stack.Navigator>
           </NavigationContainer>
       );
@@ -49,6 +52,8 @@ export default function AuthStack() {
           <Stack.Screen name='CreateAccount' component={CreateAccount}/>
           <Stack.Screen name='Login' component={Login}/>
           <Stack.Screen name='ForgotPassword' component={ForgotPassword}/>
+          <Stack.Screen name='Courses' component={Courses} options ={{headerShown : false}}/> 
+
         </Stack.Navigator>
       </NavigationContainer>
       ) 

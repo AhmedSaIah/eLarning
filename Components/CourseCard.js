@@ -1,7 +1,7 @@
 import {StyleSheet,Text,View,Image,ScrollView, TouchableOpacity} from "react-native";
 import COLORS from "../assets/COLORS";
 
-  export default function CourseCard({ id, image, label, duration,byWho,action}) {
+  export default function CourseCard({ id, name, image, label, Duration,Instructor,action}) {
     return (
       <TouchableOpacity style={styles.content} onPress = {action}>
         <ScrollView contentContainerStyle={{ flex: 1 }}>
@@ -11,8 +11,8 @@ import COLORS from "../assets/COLORS";
               <Image source={{ uri: image }} style={styles.image} />
               <View style={styles.header}>
               <Text style={styles.label}>{label}</Text>
-                <Text style={styles.label2}>{byWho}</Text>
-                <Text style={styles.duration}>{duration}</Text>
+                <Text style={styles.label2}>{Instructor}</Text>
+                <Text style={styles.duration}>{Duration}</Text>
               </View>
             </View>
             <Text style ={{color : COLORS.primary, fontWeight:'bold',fontSize:16, textAlign: 'right'}}>Free</Text>

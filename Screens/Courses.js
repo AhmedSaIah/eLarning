@@ -1,13 +1,15 @@
 import React, {useState,useEffect} from 'react';
-import { View , StyleSheet, ScrollView,StatusBar,TouchableOpacity,Text, SliderComponent} from 'react-native';
+import { View , Image, StyleSheet, ScrollView,StatusBar,TouchableOpacity,Text, SliderComponent} from 'react-native';
 
 
 import COLORS from '../assets/COLORS';
 import CourseCard from "../Components/CourseCard";
 
 import {getItem} from '../Firebase/collection';
+import globalStyles from '../styles/style';
+import { auth } from '../Firebase/firebase-config';
 
-export default function Courses(){
+export default function Courses({navigation}){
 
     const [color1, setColor1] = useState (COLORS.primary);
     const [color2, setColor2] = useState (COLORS.black);
@@ -62,12 +64,20 @@ export default function Courses(){
         setColor3(COLORS.black);
         setColor4(COLORS.primary);
     }
-    
-   
+  
     return(
-
+        <ScrollView>
         <View>
             <View style = {styles.header}>
+                <Text style={styles.headerText}>Let's keep learning</Text>
+                <Image
+        style={styles.avatar}
+        source={{
+          uri: 'https://bootdey.com/img/Content/avatar/avatar6.png',
+        }}
+        size={80}
+      />
+
                 {/* Searchbar */}
             </View>
 
@@ -88,24 +98,26 @@ export default function Courses(){
                     <Text style = {{color : color4}}>Business</Text>
                 </TouchableOpacity>
             </View>
-
+           
             {Items.map((a, index) => (
                 <ScrollView key={index}>
                     
                     <CourseCard id = {a.id}
                     label = {a.name} 
                     image = {a.image} 
-                    duration ={a.duration}
-                    byWho = {a.byWho}
-                    action = {() =>{}}
+                    Duration ={a.Duration}
+                    Instructor = {a.Instructor}
+                    action = {() =>{navigation.navigate("VideoPage")}}
                     />
             
                 </ScrollView>
 
           ))}
-
             <StatusBar style="auto"/>
-          </View>        
+            
+          </View>  
+          </ScrollView>   
+             
     );
 }
 
@@ -118,6 +130,25 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         paddingHorizontal : 35,
+      },
+      headerText: {
+        fontWeight: "bold",
+        color:COLORS.white,
+        fontSize: 20,
+        marginVertical: 15,
+        paddingLeft: 75,
+      },
+      avatar: {
+        marginHorizontal: 20,
+        width: 80,
+        height: 80,
+        borderRadius: 63,
+        borderWidth: 4,
+        borderColor: "white",
+        marginBottom: 10,
+        alignSelf: "center",
+        position: "absolute",
+        marginTop: 130,
       },
 
       
